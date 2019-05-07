@@ -28,6 +28,12 @@ const snoowrap = require('snoowrap');
 //   time: "week"
 // }
 // const searchOptions = {
+//   subreddit: "indieheads",
+//   query: "[FRESH ",
+//   sort: "relevance",
+//   time: "week"
+// }
+// const searchOptions = {
 //   subreddit: "mathrock",
 //   query: "[FRESH ",
 //   sort: "relevance",
@@ -55,12 +61,14 @@ router.get('/search/:subreddit', function(req, res) {
   var videos = [];
   var songs = [];
   var other =[];
+
   const options = {
     subreddit: req.params.subreddit,
     query: "[FRESH ",
     sort: "relevance",
     time: "week"
   }
+
   r.search(options).then(response => {
     response.forEach(function(post) {
       if (post.title.includes("ALBUM")) {

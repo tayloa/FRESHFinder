@@ -1,0 +1,23 @@
+body {
+  background: black;
+  color: white;
+}
+#main-container {
+  margin: 10px;
+  width: 90%;
+  background: black;
+  display: inline-block;
+}
+#posts-container {
+  border: 1px solid black;
+  width: 50%;
+  background: gray;
+}
+#options-container {
+  border: 1px solid black;
+  width: 50%;
+  background: gray;
+}
+#info-containter {
+
+}
