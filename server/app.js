@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const errorHandler = require('errorhandler');
 const cors = require('cors');
 const snoowrap = require('snoowrap');
-const port = 3000;
+const port = 8080;
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -56,4 +56,4 @@ app.use((err, req, res) => {
 });
 
 
-const server = app.listen((process.env.port || 3000), () => console.log(`[FRESH]Finder is listening on port ${port}!`));
+const server = app.listen((process.env.port || 8080), () => console.log(`[FRESH]Finder is listening on port ${port}!`));

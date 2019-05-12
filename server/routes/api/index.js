@@ -3,42 +3,6 @@ const router = require('express').Router();
 const snoowrap = require('snoowrap');
 
 // console.log(options);
-// const searchOptions = {
-//   subreddit: "HipHopHeads",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
-// const searchOptions = {
-//   subreddit: "RnBHeads",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
-// const searchOptions = {
-//   subreddit: "rnb",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
-// const searchOptions = {
-//   subreddit: "PopHeads",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
-// const searchOptions = {
-//   subreddit: "indieheads",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
-// const searchOptions = {
-//   subreddit: "mathrock",
-//   query: "[FRESH ",
-//   sort: "relevance",
-//   time: "week"
-// }
 
 var options = {
   client_id: process.env.client_id,
@@ -54,6 +18,7 @@ router.get('/search/:subreddit/leaks', function(req, res) {
   // [LEAK]
 });
 
+// Get [FRESH] posts from a specific subreddit
 router.get('/search/:subreddit', function(req, res) {
   var albums = [];
   var eps = [];
@@ -69,26 +34,27 @@ router.get('/search/:subreddit', function(req, res) {
     time: "week"
   }
 
+  // Sort FRESH postsby type
   r.search(options).then(response => {
     response.forEach(function(post) {
       if (post.title.includes("ALBUM")) {
-        albums.push({ title: post.title, link: post.url});
+        albums.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       else if (post.title.includes("MIXTAPE")) {
-        mixtapes.push({ title: post.title, link: post.url});
+        mixtapes.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       else if (post.title.includes("EP")) {
-        eps.push({ title: post.title, link: post.url});
+        eps.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       else if (post.title.includes("VIDEO")) {
-        videos.push({ title: post.title, link: post.url});
+        videos.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       else if (post.title.includes("[FRESH]")) {
-        songs.push({ title: post.title, link: post.url});
+        songs.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       // Unknown type
       else {
-        other.push({ title: post.title, link: post.url});
+        other.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
     });
     var results =  {
@@ -101,6 +67,108 @@ router.get('/search/:subreddit', function(req, res) {
     }
     res.json(results);
   });
+});
+
+// Get [FRESH] posts from all subreddits
+router.get('/search', function(req, res) {
+  var albums = [];
+  var eps = [];
+  var mixtapes = [];
+  var videos = [];
+  var songs = [];
+  var other =[];
+
+  var allOptions = [
+    {
+      subreddit: "HipHopHeads",
+      query: "[FRESH ",
+      sort: "relevance",
+      time: "week"
+    }
+    ,{
+      subreddit: "RnBHeads",
+      query: "[FRESH ",
+      sort: "relevance",
+      time: "week"
+    }
+    ,{
+      subreddit: "rnb",
+      query: "[FRESH ",
+      sort: "relevance",
+      time: "week"
+    }
+    ,{
+      subreddit: "PopHeads",
+      query: "[FRESH ",
+      sort: "relevance",
+      time: "week"
+    }
+    ,{
+      subreddit: "indieheads",
+      query: "[FRESH ",
+      sort: "relevance",
+      time: "week"
+    }
+  ];
+
+  // Make search request to Reddit api for FRESH posts and sort by type
+  async function getPosts(option) {
+
+    // Make search request to Reddit api
+    await r.search(option).then(response => {
+
+      // Sort FRESH posts by type
+      response.forEach(function(post) {
+        if (post.title.includes("ALBUM]")) {
+          albums.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+        else if (post.title.includes("MIXTAPE]")) {
+          mixtapes.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+        else if (post.title.includes("EP]")) {
+          eps.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+        else if (post.title.includes("VIDEO]")) {
+          videos.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+        else if (post.title.includes("[FRESH]")) {
+          songs.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+        // Unknown type
+        else {
+          other.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+        }
+      });
+
+      new Promise(resolve => setTimeout(resolve, 300));
+    });
+}
+
+  // Process all request options
+  async function processOptions(array) {
+
+    // map array to promises
+    const promises = array.map(getPosts);
+
+    // wait until all promises are resolved
+    await Promise.all(promises);
+
+    var results =  {
+      albums: albums,
+      eps: eps,
+      mixtapes: mixtapes,
+      videos: videos,
+      songs: songs,
+      other: other
+    }
+
+    // Send results to user
+    res.json(results);
+  }
+
+  // Run all request options and send the results
+  processOptions(allOptions);
+
 });
 
 module.exports = router;
