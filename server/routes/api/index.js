@@ -24,7 +24,7 @@ router.get('/search/:subreddit', function(req, res) {
   var eps = [];
   var mixtapes = [];
   var videos = [];
-  var songs = [];
+  var singles = [];
   var other =[];
 
   const options = {
@@ -50,7 +50,7 @@ router.get('/search/:subreddit', function(req, res) {
         videos.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       else if (post.title.includes("[FRESH]")) {
-        songs.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+        singles.push({ title: post.title, link: post.url, subreddit: options.subreddit});
       }
       // Unknown type
       else {
@@ -62,7 +62,7 @@ router.get('/search/:subreddit', function(req, res) {
       eps: eps,
       mixtapes: mixtapes,
       videos: videos,
-      songs: songs,
+      singles: songs,
       other: other
     }
     res.json(results);
@@ -75,7 +75,7 @@ router.get('/search', function(req, res) {
   var eps = [];
   var mixtapes = [];
   var videos = [];
-  var songs = [];
+  var singles = [];
   var other =[];
 
   var allOptions = [
@@ -132,7 +132,7 @@ router.get('/search', function(req, res) {
           videos.push({ title: post.title, link: post.url, subreddit: option.subreddit});
         }
         else if (post.title.includes("[FRESH]")) {
-          songs.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          singles.push({ title: post.title, link: post.url, subreddit: option.subreddit});
         }
         // Unknown type
         else {
@@ -158,7 +158,7 @@ router.get('/search', function(req, res) {
       eps: eps,
       mixtapes: mixtapes,
       videos: videos,
-      songs: songs,
+      singles: songs,
       other: other
     }
 

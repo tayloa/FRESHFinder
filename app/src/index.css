@@ -44,6 +44,61 @@ body {
   width: 100%;
   background: #E5E5E5;
 }
+
+/* Active tab */
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active ,
+ .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.focus {
+  background-color: purple;
+  color: white;
+}
+
+/* Inactive tab */
+.nav-tabs .nav-link {
+  color: white;
+}
+.nav-tabs .nav-link:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Disabled tab */
+.nav-tabs .nav-link.disabled {
+  background-color: lightgray;
+  color: darkgray;
+}
+
+/* Inactive tabs */
+.albums-tab {
+  background-color: blue;
+  color: white;
+}
+.singles-tab {
+  background-color: green;
+  color: white;
+}
+.eps-tab {
+  background-color: red;
+  color: white;
+}
+.mixtapes-tab {
+  background-color: yellow;
+  color: black !important;
+}
+.others-tab {
+  background-color: orange;
+  color: white;
+}
+.all-tab {
+  background-color: purple;
+  color: white;
+}
+
+.tab-content-container {
+  padding: 20px;
+  background: white;
+  height: 400px;
+  overflow-y: scroll;
+}
 .post-link {
   font-size: 20px;
   color: black;
