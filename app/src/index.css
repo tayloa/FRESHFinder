@@ -19,7 +19,6 @@ body {
 #main-container {
   padding: 40px;
   margin: 40px;
-  height: 600px;
   width: 100%;
   background: black;
   display: flex;
@@ -29,15 +28,14 @@ body {
 #posts-container {
   margin: 10px;
   padding: 20px;
+  height: 600px;
   width: 50%;
-  background: #E5E5E5;
 }
 #options-container {
   /* padding: 10px;
   margin: 10px; */
   width: 50%;
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
 }
 #info-containter {
@@ -45,20 +43,49 @@ body {
   background: #E5E5E5;
 }
 
-/* Active tab */
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active ,
- .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.focus {
-  background-color: purple;
-  color: white;
+
+/* Inactive tabs */
+.albums-nav-link {
+  background: rgba(245, 0, 0, 0.75);
+  border-radius: 5px 5px 0px 0px;
+}
+.singles-nav-link {
+  background: rgba(17, 215, 0, 0.75);
+  border-radius: 5px 5px 0px 0px;
+  margin-left: 2px;
+}
+.eps-nav-link {
+  background: rgba(255, 199, 0, 0.75);
+  border-radius: 5px 5px 0px 0px;
+  margin-left: 2px;
+}
+.mixtapes-nav-link {
+  background: rgba(9, 119, 221, 0.75);
+  border-radius: 5px 5px 0px 0px;
+  margin-left: 2px;
+}
+.others-nav-link {
+  background: rgba(107, 47, 184, 0.75);
+  border-radius: 5px 5px 0px 0px;
+  margin-left: 2px;
 }
 
+
+/* Active tab */
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link.focus {
+  background-color: inherit;
+  color: inherit;
+  /* border: 3px solid #3366BB; */
+  border-bottom: none;
+}
 /* Inactive tab */
 .nav-tabs .nav-link {
+  font-weight: bold;
   color: white;
 }
 .nav-tabs .nav-link:hover {
-    background-color: white;
-    color: black;
+  font-weight: bolder;
+  filter: brightness(95%);
 }
 
 /* Disabled tab */
@@ -67,40 +94,15 @@ body {
   color: darkgray;
 }
 
-/* Inactive tabs */
-.albums-tab {
-  background-color: blue;
-  color: white;
-}
-.singles-tab {
-  background-color: green;
-  color: white;
-}
-.eps-tab {
-  background-color: red;
-  color: white;
-}
-.mixtapes-tab {
-  background-color: yellow;
-  color: black !important;
-}
-.others-tab {
-  background-color: orange;
-  color: white;
-}
-.all-tab {
-  background-color: purple;
-  color: white;
-}
-
 .tab-content-container {
+  background: #E5E5E5;
   padding: 20px;
-  background: white;
   height: 400px;
   overflow-y: scroll;
 }
 .post-link {
-  font-size: 20px;
+  background: white;
+  font-size: 15px;
   color: black;
 }
 .option {

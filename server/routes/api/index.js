@@ -2,8 +2,6 @@ require('dotenv').config();
 const router = require('express').Router();
 const snoowrap = require('snoowrap');
 
-// console.log(options);
-
 var options = {
   client_id: process.env.client_id,
 	client_secret: process.env.client_secret,
@@ -62,7 +60,7 @@ router.get('/search/:subreddit', function(req, res) {
       eps: eps,
       mixtapes: mixtapes,
       videos: videos,
-      singles: songs,
+      singles: singles,
       other: other
     }
     res.json(results);
@@ -158,7 +156,7 @@ router.get('/search', function(req, res) {
       eps: eps,
       mixtapes: mixtapes,
       videos: videos,
-      singles: songs,
+      singles: singles,
       other: other
     }
 
