@@ -35,24 +35,24 @@ router.get('/search/:subreddit', function(req, res) {
   // Sort FRESH postsby type
   r.search(options).then(response => {
     response.forEach(function(post) {
-      if (post.title.includes("ALBUM")) {
-        albums.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+      if (post.title.includes("ALBUM]")) {
+        albums.push({  data: post, subreddit: option.subreddit});
       }
-      else if (post.title.includes("MIXTAPE")) {
-        mixtapes.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+      else if (post.title.includes("MIXTAPE]")) {
+        mixtapes.push({  data: post, subreddit: option.subreddit});
       }
-      else if (post.title.includes("EP")) {
-        eps.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+      else if (post.title.includes("EP]")) {
+        eps.push({  data: post, subreddit: option.subreddit});
       }
-      else if (post.title.includes("VIDEO")) {
-        videos.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+      else if (post.title.includes("VIDEO]")) {
+        videos.push({  data: post, subreddit: option.subreddit});
       }
       else if (post.title.includes("[FRESH]")) {
-        singles.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+        singles.push({  data: post, subreddit: option.subreddit});
       }
       // Unknown type
       else {
-        other.push({ title: post.title, link: post.url, subreddit: options.subreddit});
+        other.push({ data: post, subreddit: option.subreddit});
       }
     });
     var results =  {
@@ -118,23 +118,23 @@ router.get('/search', function(req, res) {
       // Sort FRESH posts by type
       response.forEach(function(post) {
         if (post.title.includes("ALBUM]")) {
-          albums.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          albums.push({  data: post, subreddit: option.subreddit});
         }
         else if (post.title.includes("MIXTAPE]")) {
-          mixtapes.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          mixtapes.push({  data: post, subreddit: option.subreddit});
         }
         else if (post.title.includes("EP]")) {
-          eps.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          eps.push({  data: post, subreddit: option.subreddit});
         }
         else if (post.title.includes("VIDEO]")) {
-          videos.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          videos.push({  data: post, subreddit: option.subreddit});
         }
         else if (post.title.includes("[FRESH]")) {
-          singles.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          singles.push({  data: post, subreddit: option.subreddit});
         }
         // Unknown type
         else {
-          other.push({ title: post.title, link: post.url, subreddit: option.subreddit});
+          other.push({ data: post, subreddit: option.subreddit});
         }
       });
 
