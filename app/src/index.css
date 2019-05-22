@@ -16,31 +16,57 @@ body {
   background: black;
   color: white;
 }
+#page-frame {
+  /* display: grid;
+  grid-template-columns: repeat(1, 100%);
+  grid-template-rows: 100px 700px 500px; */
+}
+#header {
+  grid-column: span 12;
+}
 #main-container {
-  padding: 40px;
+  padding: 20px;
   margin: 40px;
   width: 100%;
   background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(1, 100%);
+  grid-template-rows: 500px 500px;
 }
 #posts-container {
-  margin: 10px;
-  padding: 20px;
-  height: 600px;
+  height: 40%;
   width: 50%;
+  /* font-family: 'Indie Flower', cursive; */
+}
+.post-container {
+  margin: 20px;
+  width: 100%;
+  min-height: 40px;
+  max-height: 80px;
+  color: black;
+  background: none;
+}
+.post-container p {
+  margin: 3px;
 }
 #options-container {
-  /* padding: 10px;
-  margin: 10px; */
+  margin: 20px 0px 0px 20px;
+  grid-column: span 12;
   width: 50%;
   display: flex;
   justify-content: space-between;
 }
-#info-containter {
-  width: 100%;
+#info-container {
+  height: 40%;
+  width: 50%;
+  grid-row: 2/2;
+  color: black;
   background: #E5E5E5;
+}
+
+.info-text {
+  background: white;
 }
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import TabContent from './TabContent';
 import axios from 'axios';
 import { Nav, Tab } from 'react-bootstrap';
+import InfoContainer from './InfoContainer';
 import { CircleSpinner } from "react-spinners-kit";
 
 
@@ -13,6 +14,7 @@ class PostContainer extends React.Component {
       loading: true,
       key: 'albums',
       filter: this.props.filter,
+      selected: null,
       posts: null
     };
   }
@@ -28,6 +30,10 @@ class PostContainer extends React.Component {
 
   componentWillUnmount() {
     this.serverRequest.abort();
+  }
+
+  handleSelected = (post) => {
+    this.setState({selected: post});
   }
 
   render() {
@@ -56,25 +62,41 @@ class PostContainer extends React.Component {
 
             {this.state.posts ? <Tab.Content>
               <Tab.Pane eventKey="albums">
-                <TabContent posts={this.state.posts.albums} filter=""/>
+                <TabContent posts={this.state.posts.albums} onSelectPost={this.handleSelected} filter=""/>
               </Tab.Pane>
               <Tab.Pane eventKey="singles">
-                <TabContent posts={this.state.posts.singles} filter=""/>
+                <TabContent posts={this.state.posts.singles} onSelectPost={this.handleSelected} filter=""/>
               </Tab.Pane>
               <Tab.Pane eventKey="eps">
-                <TabContent posts={this.state.posts.eps} filter=""/>
+                <TabContent posts={this.state.posts.eps} onSelectPost={this.handleSelected} filter=""/>
               </Tab.Pane>
               <Tab.Pane eventKey="mixtapes">
-                <TabContent posts={this.state.posts.mixtapes} filter=""/>
+                <TabContent posts={this.state.posts.mixtapes} onSelectPost={this.handleSelected} filter=""/>
               </Tab.Pane>
               <Tab.Pane eventKey="other">
-                <TabContent posts={this.state.posts.other} filter=""/>
+                <TabContent posts={this.state.posts.other} onSelectPost={this.handleSelected} filter=""/>
               </Tab.Pane>
             </Tab.Content> : <CircleSpinner size={200}/>
           }
 
+          <div id="options-container">
+            <div>FILTER</div>
+              <select name="list" id="personlist">
+                <option value="4/28/2019">4/28/2019</option>
+                <option value="5/5/2019">5/5/2019</option>
+                <option value="5/12/2019">5/12/2019</option>
+             </select>
+            <button>r/HipHopHeads</button>
+            <button>r/IndieHeads</button>
+            <button>r/RnB</button>
+            <button>r/RnBHeads</button>
+            <button>r/PopHeads</button>
+            <button>r/MathRock</button>
+          </div>
           </Tab.Container>
         </div>
+
+        <InfoContainer post={this.state.selected}/>
       </div>
     );
   }
