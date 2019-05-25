@@ -1,28 +1,10 @@
-/* body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
 body {
   background: black;
   color: white;
 }
-#page-frame {
-  /* display: grid;
-  grid-template-columns: repeat(1, 100%);
-  grid-template-rows: 100px 700px 500px; */
-}
 #header {
-  grid-column: span 12;
+  margin-top: 20px;
+  text-align: center;
 }
 #main-container {
   padding: 20px;
@@ -32,99 +14,107 @@ body {
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(1, 100%);
-  grid-template-rows: 500px 500px;
+  grid-template-rows: 1000fr;
 }
 #posts-container {
+  grid-column: 1 / 2;
   height: 40%;
-  width: 50%;
+  width: 100%;
+  display: inline-block;
   /* font-family: 'Indie Flower', cursive; */
 }
 .post-container {
-  margin: 20px;
   width: 100%;
-  min-height: 40px;
-  max-height: 80px;
-  color: black;
-  background: none;
+  color: white;
+  background: black;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-column-gap: 2fr;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 5px;
 }
 .post-container p {
-  margin: 3px;
+  padding-top: 0px;
+  margin: 0px 0px 2px 0px;
+}
+.post-image {
+  text-align: center;
+  align-content: center;
+}
+.post-image img {
+  border-radius: 40px;
+  min-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  max-width: 50px;
+}
+.post-info {
+  grid-column: 2 / 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2fr;
+}
+.post-score {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  text-align: center;
 }
 #options-container {
-  margin: 20px 0px 0px 20px;
-  grid-column: span 12;
+  margin: 50px 0px 0px 20px;
   width: 50%;
-  display: flex;
+  display: grid;
   justify-content: space-between;
 }
 #info-container {
   height: 40%;
   width: 50%;
-  grid-row: 2/2;
+  grid-row: 2 / 2;
   color: black;
   background: #E5E5E5;
 }
-
 .info-text {
   background: white;
 }
-
-
-/* Inactive tabs */
-.albums-nav-link {
-  background: rgba(245, 0, 0, 0.75);
-  border-radius: 5px 5px 0px 0px;
-}
-.singles-nav-link {
-  background: rgba(17, 215, 0, 0.75);
-  border-radius: 5px 5px 0px 0px;
-  margin-left: 2px;
-}
-.eps-nav-link {
-  background: rgba(255, 199, 0, 0.75);
-  border-radius: 5px 5px 0px 0px;
-  margin-left: 2px;
-}
-.mixtapes-nav-link {
-  background: rgba(9, 119, 221, 0.75);
-  border-radius: 5px 5px 0px 0px;
-  margin-left: 2px;
-}
-.others-nav-link {
-  background: rgba(107, 47, 184, 0.75);
-  border-radius: 5px 5px 0px 0px;
-  margin-left: 2px;
-}
-
-
-/* Active tab */
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link.focus {
-  background-color: inherit;
-  color: inherit;
-  /* border: 3px solid #3366BB; */
-  border-bottom: none;
-}
-/* Inactive tab */
-.nav-tabs .nav-link {
-  font-weight: bold;
-  color: white;
-}
-.nav-tabs .nav-link:hover {
-  font-weight: bolder;
-  filter: brightness(95%);
-}
-
-/* Disabled tab */
-.nav-tabs .nav-link.disabled {
-  background-color: lightgray;
-  color: darkgray;
-}
-
 .tab-content-container {
-  background: #E5E5E5;
-  padding: 20px;
+  border: 1px solid white;
+  padding: 10px;
   height: 400px;
   overflow-y: scroll;
+}
+.tab-list {
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+}
+.tab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px 5px 0px 0px;
+}
+.tab-list-active {
+  font-weight: bolder;
+  border: solid #ccc;
+  border-width: 1px 1px 0 1px;
+  filter: brightness(95%);
+}
+.tab-list-active.albums-tab {
+  border-bottom: 5px solid rgba(245, 0, 0, 0.75);
+}
+.tab-list-active.singles-tab {
+  border-bottom: 3px solid rgba(17, 215, 0, 0.75);
+}
+.tab-list-active.eps-tab {
+  border-bottom: 3px solid rgba(255, 199, 0, 0.75);
+}
+.tab-list-active.mixtapes-tab {
+  border-bottom: 3px solid rgba(9, 119, 221, 0.75);
+}
+.tab-list-active.other-tab {
+  border-bottom: 3px solid rgba(107, 47, 184, 0.75);
 }
 .post-link {
   background: white;
