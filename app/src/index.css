@@ -5,6 +5,8 @@ body {
 #header {
   margin-top: 20px;
   text-align: center;
+  font-size: 40px;
+  font-family: 'Permanent Marker', cursive;
 }
 #main-container {
   padding: 20px;
@@ -15,13 +17,14 @@ body {
   justify-items: center;
   grid-template-columns: repeat(1, 100%);
   grid-template-rows: 1000fr;
+  font-family: 'Ramabhadra', sans-serif;
 }
 #posts-container {
   grid-column: 1 / 2;
   height: 40%;
-  width: 100%;
+  width: 50%;
   display: inline-block;
-  /* font-family: 'Indie Flower', cursive; */
+
 }
 .post-container {
   width: 100%;
@@ -37,7 +40,7 @@ body {
 }
 .post-container p {
   padding-top: 0px;
-  margin: 0px 0px 2px 0px;
+  margin: 0px 0px 0px 0px;
 }
 .post-image {
   text-align: center;
@@ -62,11 +65,39 @@ body {
   grid-row: 2 / 2;
   text-align: center;
 }
-#options-container {
-  margin: 50px 0px 0px 20px;
-  width: 50%;
+#filter-container {
   display: grid;
-  justify-content: space-between;
+  grid-template-rows: 10fr;
+  grid-template-columns: repeat(4, 10fr);
+  grid-column-gap: 20px;
+}
+#filter-container  > div > h1 {
+  font-size: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+#filter-container  > div > p {
+  font-size: 15px;
+  color: gray;
+}
+#filter-container  > div > p:hover, #filter-container  > div > p.active-filter {
+  color: white;
+}
+.release-filter {
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+.subreddit-filter {
+  grid-row: 1 / 1;
+  grid-column: 2 / 2;
+}
+.sort-filter {
+  grid-row: 1 / 1;
+  grid-column: 3 / 3;
+}
+.platform-filter {
+  grid-row: 1 / 1;
+  grid-column: 4 / 4;
 }
 #info-container {
   height: 40%;

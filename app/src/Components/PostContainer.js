@@ -3,6 +3,7 @@ import TabContent from './TabContent';
 import Tabs from './Tabs';
 import axios from 'axios';
 import InfoContainer from './InfoContainer';
+import FilterContainer from './FilterContainer';
 import { CircleSpinner } from "react-spinners-kit";
 
 
@@ -14,7 +15,7 @@ class PostContainer extends React.Component {
     this.state = {
       loading: true,
       key: 'albums',
-      filter: this.props.filter,
+      filters: [],
       selected: null,
       posts: null
     };
@@ -33,8 +34,12 @@ class PostContainer extends React.Component {
     this.serverRequest.abort();
   }
 
-  handleSelected = (post) => {
+  handleSelectedPost = (post) => {
     this.setState({selected: post});
+  }
+
+  handleSelectedFilters = (filters) => {
+    this.setState({ filters });
   }
 
   render() {
@@ -42,42 +47,32 @@ class PostContainer extends React.Component {
       <div id="main-container">
         <div id="posts-container">
           <div>
+            <FilterContainer onSelectFilters={this.handleSelectedFilters}/>
             {this.state.posts ?
               <Tabs>
                 <div label="Albums">
-                  <TabContent posts={this.state.posts.albums} onSelectPost={this.handleSelected} filter=""/>
+                  <TabContent posts={this.state.posts.albums} onSelectPost={this.handleSelectedPost} filters=""/>
                 </div>
                 <div label="Singles">
-                  <TabContent posts={this.state.posts.singles} onSelectPost={this.handleSelected} filter=""/>
+                  <TabContent posts={this.state.posts.singles} onSelectPost={this.handleSelectedPost} filters=""/>
                 </div>
                 <div label="EPs">
-                  <TabContent posts={this.state.posts.eps} onSelectPost={this.handleSelected} filter=""/>
+                  <TabContent posts={this.state.posts.eps} onSelectPost={this.handleSelectedPost} filters=""/>
                 </div>
                 <div label="Mixtapes">
-                  <TabContent posts={this.state.posts.mixtapes} onSelectPost={this.handleSelected} filter=""/>
+                  <TabContent posts={this.state.posts.mixtapes} onSelectPost={this.handleSelectedPost} filters=""/>
                 </div>
                 <div label="Other">
-                  <TabContent posts={this.state.posts.other} onSelectPost={this.handleSelected} filter=""/>
+                  <TabContent posts={this.state.posts.other} onSelectPost={this.handleSelectedPost} filters=""/>
                 </div>
+
               </Tabs> :
               <CircleSpinner size={200}/>
             }
           </div>
-
-          <div id="options-container">
-            <div>FILTER</div>
-              <select name="list" id="personlist">
-                <option value="4/28/2019">4/28/2019</option>
-                <option value="5/5/2019">5/5/2019</option>
-                <option value="5/12/2019">5/12/2019</option>
-              </select>
-              <span>r/HipHopHeads</span>
-              <span>r/IndieHeads</span>
-              <span>r/RnB</span>
-              <span>r/RnBHeads</span>
-              <span>r/PopHeads</span>
-              <span>r/MathRock</span>
-          </div>
+          {
+            this.state.filters
+          }
         </div>
 
         <InfoContainer post={this.state.selected}/>
