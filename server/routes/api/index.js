@@ -36,23 +36,23 @@ router.get('/search/:subreddit', function(req, res) {
   r.search(options).then(response => {
     response.forEach(function(post) {
       if (post.title.includes("ALBUM]")) {
-        albums.push({  data: post, subreddit: option.subreddit});
+        albums.push(post);
       }
       else if (post.title.includes("MIXTAPE]")) {
-        mixtapes.push({  data: post, subreddit: option.subreddit});
+        mixtapes.push(post);
       }
       else if (post.title.includes("EP]")) {
-        eps.push({  data: post, subreddit: option.subreddit});
+        eps.push(post);
       }
       else if (post.title.includes("VIDEO]")) {
-        videos.push({  data: post, subreddit: option.subreddit});
+        videos.push(post);
       }
       else if (post.title.includes("[FRESH]")) {
-        singles.push({  data: post, subreddit: option.subreddit});
+        singles.push(post);
       }
       // Unknown type
       else {
-        other.push({ data: post, subreddit: option.subreddit});
+        other.push(post);
       }
     });
     var results =  {
@@ -118,23 +118,23 @@ router.get('/search', function(req, res) {
       // Sort FRESH posts by type
       response.forEach(function(post) {
         if (post.title.includes("ALBUM]")) {
-          albums.push({  data: post, subreddit: option.subreddit});
+          albums.push(post);
         }
         else if (post.title.includes("MIXTAPE]")) {
-          mixtapes.push({  data: post, subreddit: option.subreddit});
+          mixtapes.push(post);
         }
         else if (post.title.includes("EP]")) {
-          eps.push({  data: post, subreddit: option.subreddit});
+          eps.push(post);
         }
         else if (post.title.includes("VIDEO]")) {
-          videos.push({  data: post, subreddit: option.subreddit});
+          videos.push(post);
         }
         else if (post.title.includes("[FRESH]")) {
-          singles.push({  data: post, subreddit: option.subreddit});
+          singles.push(post);
         }
         // Unknown type
         else {
-          other.push({ data: post, subreddit: option.subreddit});
+          other.push(post);
         }
       });
 
