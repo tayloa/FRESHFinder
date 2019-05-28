@@ -12,7 +12,6 @@ body {
   padding: 20px;
   margin: 40px;
   width: 100%;
-  background: black;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(1, 100%);
@@ -24,19 +23,22 @@ body {
   height: 40%;
   width: 50%;
   display: inline-block;
-
+}
+.loading-container {
+  padding-top: 100px;
+  margin: auto;
 }
 .post-container {
   width: 100%;
   color: white;
   background: black;
   display: grid;
-  grid-template-rows: 3fr 1fr;
+  grid-template-rows: 3fr;
   grid-template-columns: 2fr 10fr;
   grid-column-gap: 2fr;
-  padding: 10px;
+  padding: 10px 0px 5px 0px;
   font-size: 12px;
-  border-radius: 5px;
+  border-bottom: 1px solid gray;
 }
 .post-container p {
   padding-top: 0px;
@@ -52,6 +54,13 @@ body {
   min-height: 50px;
   max-height: 50px;
   max-width: 50px;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+.post-image img:hover {
+  cursor: pointer;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 .post-info {
   grid-column: 2 / 2;
@@ -81,6 +90,7 @@ body {
   color: gray;
 }
 #filter-container  > div > p:hover, #filter-container  > div > p.active-filter {
+  cursor: pointer;
   color: white;
 }
 .release-filter {
@@ -111,12 +121,12 @@ body {
 }
 .tab-content-container {
   border: 1px solid white;
-  padding: 10px;
+  padding: 0px;
   height: 400px;
   overflow-y: scroll;
 }
 .tab-list {
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   padding-left: 0;
 }
 .tab-list-item {
@@ -125,8 +135,10 @@ body {
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
   border-radius: 5px 5px 0px 0px;
+  cursor: pointer;
 }
 .tab-list-active {
+  cursor: pointer;
   font-weight: bolder;
   border: solid #ccc;
   border-width: 1px 1px 0 1px;
@@ -146,6 +158,35 @@ body {
 }
 .tab-list-active.other-tab {
   border-bottom: 3px solid rgba(107, 47, 184, 0.75);
+}
+.badge {
+  padding: 1px 9px 2px;
+  font-size: 12.025px;
+  font-weight: bolder;
+  white-space: nowrap;
+  color: #ffffff;
+  background-color: #999999;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+.hiphopheads-badge {
+  background: #F91F02;
+}
+.indieheads-badge {
+  background: #FFA500;
+}
+.rnb-badge {
+  background: #CC00FF;
+}
+.RnBHeads-badge {
+  background: #CC00FF
+}
+.popheads-badge {
+  background: #206BFF;
+}
+.mathrock-badge {
+  background: #12C44E;
 }
 .post-link {
   background: white;

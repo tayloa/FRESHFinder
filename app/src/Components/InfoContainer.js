@@ -27,7 +27,6 @@ class InfoContainer extends React.Component {
       if (parsed[1]) title = parsed[1].substring(1, parsed[1].length);
       return (
         <div id="info-container">
-          <img src="default-album.png" alt="album-art"/>
           <p className="info-text">{title}</p>
           <p className="info-text">{post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
           <p className="info-text">{post.subreddit}</p>

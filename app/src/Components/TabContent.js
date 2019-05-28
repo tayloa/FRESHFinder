@@ -1,29 +1,100 @@
 import React from 'react';
-import { CircleSpinner } from "react-spinners-kit";
+import ReactLoading from 'react-loading';
+
+const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 class TabContent extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+
+    // Check if posts need to be sorted
+    var posts = this.props.posts;
+    if (posts && this.props.filters) {
+
+      if (this.props.filters.score || this.props.filters.date) {
+
+        if (this.props.filters.score) {
+
+          // Sort by score
+          posts.sort(function (a, b) {
+            // a and b will be two instances of your object from your list
+
+            // possible return values
+            var a1st = -1; // negative value means left item should appear first
+            var b1st =  1; // positive value means right item should appear first
+            var equal = 0; // zero means objects are equal
+
+            // compare your object's property values and determine their order
+            if (b.score > a.score) {
+                return b1st;
+            }
+            else if (a.score > b.score) {
+                return a1st;
+            }
+            else {
+                return equal;
+            }
+          });
+        }
+
+        if (this.props.filters.date) {
+
+          // Sort by score
+          posts.sort(function (a, b) {
+            // a and b will be two instances of your object from your list
+
+            // possible return values
+            var a1st = -1; // negative value means left item should appear first
+            var b1st =  1; // positive value means right item should appear first
+            var equal = 0; // zero means objects are equal
+
+            // compare your object's property values and determine their order
+            if (b.created_utc > a.created_utc) {
+                return b1st;
+            }
+            else if (a.created_utc > b.created_utc) {
+                return a1st;
+            }
+            else {
+                return equal;
+            }
+          });
+        }
+      }
+    }
+
     this.state =  {
-      posts: this.props.posts,
-      filter: this.props.filter
+      label: this.props.label,
+      posts: posts,
+      filters: this.props.filters,
+      loading: false
     }
   }
 
   handleClick(e) {
       var index = e.currentTarget.dataset.index;
-      this.props.onSelectPost(this.state.posts[Number(index)].data);
+      this.props.onSelectPost(this.state.posts[Number(index)]);
   }
 
   render() {
+      if (this.state.posts) {
 
-    if (this.state.posts) {
-      var postObjects = this.state.posts.map( (post, index) => {
+        if (this.state.posts.length === 0) {
+          return <h1>No {this.state.label} found.</h1>
+        }
+        var postObjects = this.state.posts.map( (post, index) => {
 
-        // Convert article file name to title format
-        var parsed = post.data.title.split("]");
+        if ( this.state.filters && this.state.filters.subs.length > 0 &&  this.state.filters.subs.indexOf("r/"+post.subreddit) === -1) {
+          return ( null );
+        }
+
+        // Convert file name to title format and parse artist
+        var parsed = post.title.split("]");
         var title = parsed[0];
         var artist = "";
         if (parsed[1]) title = parsed[1].substring(1, parsed[1].length);
@@ -33,22 +104,34 @@ class TabContent extends React.Component {
           title = parsed[1];
         }
 
+        // Convert date to format
+        var date = new Date(post.created_utc*1000);
+        // Hours part from the timestamp
+        var hours = date.getHours();
+        // Minutes part from the timestamp
+        var minutes = "0" + date.getMinutes();
+        // Seconds part from the timestamp
+        var seconds = "0" + date.getSeconds();
+        // Will display time in 10:30:23 format
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+        var dateString = dayNames[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + ", " +  date.getFullYear() +"  " + formattedTime;
+
         return (
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
                 <img src="default-album.png" alt="album-art"></img>
+                <div className="post-score">{post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
             </div>
             <div className="post-info">
               <p>{title}</p>
               <p>{artist}</p>
-              <p>r/{post.data.subreddit}</p>
+              <p> <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span> | {dateString}</p>
             </div>
-            <div className="post-score">{post.data.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
           </div>
         )
       });
     } else {
-      return ( <CircleSpinner size={200}/> );
+      return ( <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"25%"} width={"25%"} /> );
     }
 
     return (
