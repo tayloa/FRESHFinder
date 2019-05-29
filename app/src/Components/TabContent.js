@@ -14,11 +14,17 @@ class TabContent extends React.Component {
 
     // Check if posts need to be sorted
     var posts = this.props.posts;
-    if (posts && this.props.filters) {
+    var filters = this.props.filters;
+    if (posts && filters) {
 
-      if (this.props.filters.score || this.props.filters.date) {
+      if (filters.subs.length > 0) {
+        posts = posts.filter(function (post) {
+          return filters.subs.indexOf("r/"+post.subreddit) !== -1
+        });
+      }
+      if (filters.score || filters.date) {
 
-        if (this.props.filters.score) {
+        if (filters.score) {
 
           // Sort by score
           posts.sort(function (a, b) {
@@ -42,7 +48,7 @@ class TabContent extends React.Component {
           });
         }
 
-        if (this.props.filters.date) {
+        if (filters.date) {
 
           // Sort by score
           posts.sort(function (a, b) {
@@ -69,9 +75,8 @@ class TabContent extends React.Component {
     }
 
     this.state =  {
-      label: this.props.label,
       posts: posts,
-      filters: this.props.filters,
+      filters: filters,
       loading: false
     }
   }
@@ -85,7 +90,10 @@ class TabContent extends React.Component {
       if (this.state.posts) {
 
         if (this.state.posts.length === 0) {
-          return <h1>No {this.state.label} found.</h1>
+          if (this.props.label === "Other") return ( <h1>No unclassified content found.</h1> );
+          else {
+              return ( <h1>No {this.props.label.toLowerCase()} found.</h1> );
+          }
         }
         var postObjects = this.state.posts.map( (post, index) => {
 

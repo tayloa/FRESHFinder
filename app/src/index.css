@@ -27,6 +27,7 @@ body {
 .collapsible-header {
    cursor: pointer;
    padding-bottom: 5px;
+   font-size: 20px;
 }
 .collapsible-content {
   cursor: pointer;
@@ -53,8 +54,8 @@ body {
   grid-template-rows: 3fr;
   grid-template-columns: 2fr 10fr;
   grid-column-gap: 2fr;
-  padding: 10px 0px 5px 0px;
-  font-size: 12px;
+  padding: 15px 0px 15px 0px;
+  font-size: 15px;
   border-bottom: 1px solid gray;
 }
 .post-container p {
@@ -67,10 +68,10 @@ body {
 }
 .post-image img {
   border-radius: 40px;
-  min-width: 50px;
-  min-height: 50px;
-  max-height: 50px;
-  max-width: 50px;
+  min-width: 70px;
+  min-height: 70px;
+  max-height: 70px;
+  max-width: 70px;
   -webkit-transition: -webkit-transform .8s ease-in-out;
           transition:         transform .8s ease-in-out;
 }
@@ -104,12 +105,12 @@ body {
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > h1 {
-  font-size: 15px;
+  font-size: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > p {
-  font-size: 15px;
+  font-size: 20px;
   color: gray;
 }
 #filter-container  > div > p:hover, #filter-container  > div > p.active-filter {
@@ -145,7 +146,7 @@ body {
 .tab-content {
   border: 1px solid white;
   padding: 1px;
-  height: 400px;
+  height: 450px;
   overflow-y: scroll;
 }
 .tab-content > h1 {
@@ -164,6 +165,7 @@ body {
   margin-bottom: 0px;
   padding: 0.5rem 0.75rem;
   border-radius: 5px 5px 0px 0px;
+  font-size: 20px;
   /* border-bottom: 1px solid white; */
   cursor: pointer;
 }
