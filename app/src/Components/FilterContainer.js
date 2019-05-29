@@ -1,6 +1,5 @@
 import React from 'react';
-import Collapsible from 'react-collapsible';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Collapsible from './Collapsible';
 
 class FilterContainer extends React.Component {
 
@@ -95,33 +94,32 @@ class FilterContainer extends React.Component {
 
   render() {
     return(
-      <Collapsible trigger="FILTER">
-        <div id="filter-container">
-          <div className="release-filter">
-            <h1>Date</h1>
+        <Collapsible id="filter-collapsible-container" title="FILTER" icon="sliders">
+          <div id="filter-container">
+            <div className="release-filter">
+              <h1>Date Range</h1>
+            </div>
+            <div className="subreddit-filter">
+              <h1>Subreddit</h1>
+              <p onClick={this.handleSubClick}>r/hiphopheads</p>
+              <p onClick={this.handleSubClick}>r/indieheads</p>
+              <p onClick={this.handleSubClick}>r/rnb</p>
+              <p onClick={this.handleSubClick}>r/RnBHeads</p>
+              <p onClick={this.handleSubClick}>r/popheads</p>
+              <p onClick={this.handleSubClick}>r/mathrock</p>
+            </div>
+            <div className="sort-filter">
+              <h1>Sort By</h1>
+              <p onClick={this.handleScoreClick}>Score (Descending)</p>
+              <p onClick={this.handleDateClick}>Post Date (Most Recent)</p>
+            </div>
+            <div className="platform-filter">
+              <h1>Platform</h1>
+              <p onClick={this.handlePlatformClick}>SoundCloud</p>
+              <p onClick={this.handlePlatformClick}>Spotify</p>
+            </div>
           </div>
-          <div className="subreddit-filter">
-            <h1>Subreddit</h1>
-            <p onClick={this.handleSubClick}>r/hiphopheads</p>
-            <p onClick={this.handleSubClick}>r/indieheads</p>
-            <p onClick={this.handleSubClick}>r/rnb</p>
-            <p onClick={this.handleSubClick}>r/RnBHeads</p>
-            <p onClick={this.handleSubClick}>r/popheads</p>
-            <p onClick={this.handleSubClick}>r/mathrock</p>
-          </div>
-          <div className="sort-filter">
-            <h1>Sort By</h1>
-            <p onClick={this.handleScoreClick}>Score (Descending)</p>
-            <p onClick={this.handleDateClick}>Post Date</p>
-          </div>
-          <div className="platform-filter">
-            <h1>Platform</h1>
-            <p onClick={this.handlePlatformClick}>SoundCloud</p>
-            <p onClick={this.handlePlatformClick}>Spotify</p>
-          </div>
-        </div>
-      </Collapsible>
-
+        </Collapsible>
     );
   }
 }

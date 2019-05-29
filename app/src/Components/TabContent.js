@@ -89,10 +89,6 @@ class TabContent extends React.Component {
         }
         var postObjects = this.state.posts.map( (post, index) => {
 
-        if ( this.state.filters && this.state.filters.subs.length > 0 &&  this.state.filters.subs.indexOf("r/"+post.subreddit) === -1) {
-          return ( null );
-        }
-
         // Convert file name to title format and parse artist
         var parsed = post.title.split("]");
         var title = parsed[0];
@@ -131,7 +127,7 @@ class TabContent extends React.Component {
         )
       });
     } else {
-      return ( <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"25%"} width={"25%"} /> );
+      return ( <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"60%"} width={"60%"} /> );
     }
 
     return (

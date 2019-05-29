@@ -43,6 +43,8 @@ class PostContainer extends React.Component {
     });
   }
 
+  // <InfoContainer post={this.state.selected}/>
+
   render() {
     return (
       <div id="main-container">
@@ -76,13 +78,11 @@ class PostContainer extends React.Component {
             <div label="Other">
               { this.state.loading ?
                 <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"25%"} width={"25%"} /> :
-                <TabContent labek="Other" posts={this.state.posts.other} onSelectPost={this.handleSelectedPost} filters={this.state.filters}/>
+                <TabContent label="Other" posts={this.state.posts.other} onSelectPost={this.handleSelectedPost} filters={this.state.filters}/>
               }
             </div>
           </Tabs>
         </div>
-
-        <InfoContainer post={this.state.selected}/>
       </div>
     );
   }

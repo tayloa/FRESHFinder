@@ -24,8 +24,25 @@ body {
   width: 50%;
   display: inline-block;
 }
+.collapsible-header {
+   cursor: pointer;
+   padding-bottom: 5px;
+}
+.collapsible-content {
+  cursor: pointer;
+  opacity: 1.0;
+  transition: height 300ms ease-in-out, opacity 300ms 300ms, visibility 300ms linear 300ms;
+  transition-timing-function: ease-out;
+}
+.collapsible-content.hide, .collapsible-content.hide *{
+  transition: height ease-in ease-in, opacity 300ms ease-in, visibility 300ms hidden 300ms;
+  transition-timing-function: ease-in;
+  visibility: hidden;
+  opacity: 0.0;
+  height: 0px;
+}
 .loading-container {
-  padding-top: 100px;
+  padding-top: 50px;
   margin: auto;
 }
 .post-container {
@@ -69,6 +86,9 @@ body {
   text-overflow: ellipsis;
   min-height: 2fr;
 }
+.post-info:hover {
+  cursor: pointer;
+}
 .post-score {
   grid-column: 1 / 1;
   grid-row: 2 / 2;
@@ -79,6 +99,9 @@ body {
   grid-template-rows: 10fr;
   grid-template-columns: repeat(4, 10fr);
   grid-column-gap: 20px;
+}
+#filter-collapsible-container {
+  border-bottom: 1px solid gray;
 }
 #filter-container  > div > h1 {
   font-size: 15px;
@@ -119,45 +142,53 @@ body {
 .info-text {
   background: white;
 }
-.tab-content-container {
+.tab-content {
   border: 1px solid white;
-  padding: 0px;
+  padding: 1px;
   height: 400px;
   overflow-y: scroll;
 }
+.tab-content > h1 {
+  text-align: center;
+}
 .tab-list {
-  /* border-bottom: 1px solid #ccc; */
+  /* display: flex;
+  justify-content: space-evenly; */
+  /* border-bottom: 1px solid white; */
+  margin-bottom: 0px;
   padding-left: 0;
 }
 .tab-list-item {
   display: inline-block;
   list-style: none;
-  margin-bottom: -1px;
+  margin-bottom: 0px;
   padding: 0.5rem 0.75rem;
   border-radius: 5px 5px 0px 0px;
+  /* border-bottom: 1px solid white; */
   cursor: pointer;
 }
 .tab-list-active {
   cursor: pointer;
   font-weight: bolder;
-  border: solid #ccc;
+  border: solid white;
   border-width: 1px 1px 0 1px;
+  /* border-bottom: 0px; */
   filter: brightness(95%);
 }
 .tab-list-active.albums-tab {
-  border-bottom: 5px solid rgba(245, 0, 0, 0.75);
+  /* background: rgba(245, 0, 0, 0.75); */
 }
 .tab-list-active.singles-tab {
-  border-bottom: 3px solid rgba(17, 215, 0, 0.75);
+  /* background: rgba(17, 215, 0, 0.75); */
 }
 .tab-list-active.eps-tab {
-  border-bottom: 3px solid rgba(255, 199, 0, 0.75);
+  /* background: rgba(255, 199, 0, 0.75); */
 }
 .tab-list-active.mixtapes-tab {
-  border-bottom: 3px solid rgba(9, 119, 221, 0.75);
+  /* background: rgba(9, 119, 221, 0.75); */
 }
 .tab-list-active.other-tab {
-  border-bottom: 3px solid rgba(107, 47, 184, 0.75);
+  /* background: rgba(107, 47, 184, 0.75); */
 }
 .badge {
   padding: 1px 9px 2px;
@@ -171,22 +202,28 @@ body {
   border-radius: 9px;
 }
 .hiphopheads-badge {
-  background: #F91F02;
+  /* background: #F91F02; */
+  background: rgb(249,128,2);
+  background: linear-gradient(0deg, rgba(249,128,2,1) 13%, rgba(249,16,2,1) 100%);
 }
 .indieheads-badge {
-  background: #FFA500;
+  /* background: #12C44E; */
+  background: rgb(202,207,108);
+  background: linear-gradient(0deg, rgba(202,207,108,1) 0%, rgba(61,148,39,1) 50%);
 }
 .rnb-badge {
-  background: #CC00FF;
+  background: rgb(204,0,255);
+  background: linear-gradient(0deg, rgba(204,0,255,1) 0%, rgba(255,0,123,1) 100%);
 }
 .RnBHeads-badge {
-  background: #CC00FF
+  background: rgb(204,0,255);
+  background: linear-gradient(0deg, rgba(204,0,255,1) 0%, rgba(255,0,123,1) 100%);
 }
 .popheads-badge {
   background: #206BFF;
 }
 .mathrock-badge {
-  background: #12C44E;
+  background: #FFA500;
 }
 .post-link {
   background: white;
