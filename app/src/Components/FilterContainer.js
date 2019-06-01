@@ -97,10 +97,15 @@ class FilterContainer extends React.Component {
         <Collapsible id="filter-collapsible-container" title="FILTER" icon="sliders">
           <div id="filter-container">
             <div className="release-filter">
-              <h1>Date Range</h1>
+              <h1>DATE RANGE</h1>
+              <p>Last Hour</p>
+              <p>Today</p>
+              <p>This week</p>
+              <p>THis month</p>
+              <p>This year</p>
             </div>
             <div className="subreddit-filter">
-              <h1>Subreddit</h1>
+              <h1>SUBREDDIT</h1>
               <p onClick={this.handleSubClick}>r/hiphopheads</p>
               <p onClick={this.handleSubClick}>r/indieheads</p>
               <p onClick={this.handleSubClick}>r/rnb</p>
@@ -109,14 +114,17 @@ class FilterContainer extends React.Component {
               <p onClick={this.handleSubClick}>r/mathrock</p>
             </div>
             <div className="sort-filter">
-              <h1>Sort By</h1>
+              <h1>SORT BY</h1>
               <p onClick={this.handleScoreClick}>Score (Descending)</p>
               <p onClick={this.handleDateClick}>Post Date (Most Recent)</p>
             </div>
             <div className="platform-filter">
-              <h1>Platform</h1>
+              <h1>PLATFORM</h1>
+              <p onClick={this.handlePlatformClick}>Apple Music</p>
+              <p onClick={this.handlePlatformClick}>Bandcamp</p>
               <p onClick={this.handlePlatformClick}>SoundCloud</p>
               <p onClick={this.handlePlatformClick}>Spotify</p>
+              <p onClick={this.handlePlatformClick}>YouTube</p>
             </div>
           </div>
         </Collapsible>

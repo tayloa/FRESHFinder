@@ -46,6 +46,12 @@ class PostContainer extends React.Component {
   // <InfoContainer post={this.state.selected}/>
 
   render() {
+    // if (this.state.filters) {
+    //   var filters = this.state.filters.subs.map( (sub, index) => {
+    //     sub = sub.slice(2);
+    //     return ( <span className={sub + "-badge badge"} key={index}>r/{sub}</span> );
+    //   });
+    // }
     return (
       <div id="main-container">
         <div id="posts-container">

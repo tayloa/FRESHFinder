@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp } from "@fortawesome/free-brands-svg-icons";
 
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -92,7 +94,9 @@ class TabContent extends React.Component {
         if (this.state.posts.length === 0) {
           if (this.props.label === "Other") return ( <h1>No unclassified content found.</h1> );
           else {
-              return ( <h1>No {this.props.label.toLowerCase()} found.</h1> );
+              return ( <div class="no-content">
+                <span>No {this.props.label.toLowerCase()} found.</span>
+              </div> );
           }
         }
         var postObjects = this.state.posts.map( (post, index) => {
@@ -101,12 +105,22 @@ class TabContent extends React.Component {
         var parsed = post.title.split("]");
         var title = parsed[0];
         var artist = "";
-        if (parsed[1]) title = parsed[1].substring(1, parsed[1].length);
-        if (title.includes("-")) {
-          parsed = title.split("-");
-          artist = parsed[0];
-          title = parsed[1];
+        var score = post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (this.props.label === "Other") {
+          title = post.title;
         }
+        else {
+          if (parsed[1]) title = parsed[1].substring(1, parsed[1].length);
+          if (title.includes("-")) {
+            parsed = title.split("-");
+            artist = parsed[0];
+            title = parsed[1];
+          }
+        }
+        // TODO: Add flame emoji for posts with 1,000+ upvotes
+        // if (post.score > 1000) {
+        //   score += &#128293;
+        // }
 
         // Convert date to format
         var date = new Date(post.created_utc*1000);
@@ -119,17 +133,18 @@ class TabContent extends React.Component {
         // Will display time in 10:30:23 format
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
         var dateString = dayNames[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + ", " +  date.getFullYear() +"  " + formattedTime;
-
+        console.log(post.domain);
         return (
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
-                <img src="default-album.png" alt="album-art"></img>
-                <div className="post-score">{post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                <img src="vinyl.png" alt="album-art"></img>
+                <div className="post-score">{score}</div>
             </div>
             <div className="post-info">
-              <p>{title}</p>
-              <p>{artist}</p>
-              <p> <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span> | {dateString}</p>
+              <p className="post-title">{title}</p>
+              <p className="post-artist">{artist}</p>
+              <p> <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span> <span className="post-date">• {dateString}</span></p>
+              <p> <FontAwesomeIcon icon={faSpotify} /> <FontAwesomeIcon icon={faBandcamp} /> <FontAwesomeIcon icon={faApple} /> <FontAwesomeIcon icon={faSoundcloud} /> <FontAwesomeIcon icon={faYoutube} /></p>
             </div>
           </div>
         )

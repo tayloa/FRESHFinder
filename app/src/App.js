@@ -9,7 +9,10 @@ library.add(faStroopwafel);
 function App() {
   return (
     <div id="page-frame">
-      <div id="header"><h1>[FRESH]Finder</h1></div>
+      <div id="heading">
+        <h1>[FRESH]Finder</h1>
+        <span>+ Music releases supplied by Reddit +</span>
+      </div>
       <PostContainer />
     </div>
   );

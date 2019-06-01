@@ -1,12 +1,24 @@
+html {
+    height: 100%;
+}
 body {
+  /* background: #282828; */
+  /* background: rgb(101,100,100);
+  background: linear-gradient(0deg, rgba(101,100,100,1) 0%, rgba(40,40,40,1) 60%); */
   background: black;
   color: white;
 }
-#header {
+#heading {
   margin-top: 20px;
   text-align: center;
-  font-size: 40px;
   font-family: 'Permanent Marker', cursive;
+}
+#heading > h1 {
+  font-size: 80px;
+  margin-bottom: 0px;
+}
+#heading > span {
+  font-size: 20px;
 }
 #main-container {
   padding: 20px;
@@ -28,6 +40,10 @@ body {
    cursor: pointer;
    padding-bottom: 5px;
    font-size: 20px;
+   font-weight: bold;
+}
+.collapsible-header p {
+   margin: 0px;
 }
 .collapsible-content {
   cursor: pointer;
@@ -54,13 +70,35 @@ body {
   grid-template-rows: 3fr;
   grid-template-columns: 2fr 10fr;
   grid-column-gap: 2fr;
-  padding: 15px 0px 15px 0px;
+  padding: 10px 0px 10px 0px;
   font-size: 15px;
+  border-top: 1px solid gray;
   border-bottom: 1px solid gray;
+  margin-bottom: 0px;
+  /* background: #282828; */
+}
+.post-container:first-child {
+  border-top: 0px;
 }
 .post-container p {
   padding-top: 0px;
   margin: 0px 0px 0px 0px;
+}
+.post-title {
+  font-style: italic;
+  font-weight: bolder;
+}
+.post-artist {
+  font-weight: lighter;
+}
+.post-container:hover > .post-image > img {
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+.post-container:hover > .post-info{
+  color: white;
 }
 .post-image {
   text-align: center;
@@ -72,13 +110,6 @@ body {
   min-height: 70px;
   max-height: 70px;
   max-width: 70px;
-  -webkit-transition: -webkit-transform .8s ease-in-out;
-          transition:         transform .8s ease-in-out;
-}
-.post-image img:hover {
-  cursor: pointer;
-  -webkit-transform: rotate(360deg);
-          transform: rotate(360deg);
 }
 .post-info {
   grid-column: 2 / 2;
@@ -86,6 +117,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   min-height: 2fr;
+  color: rgb(215, 218, 220);
 }
 .post-info:hover {
   cursor: pointer;
@@ -94,6 +126,10 @@ body {
   grid-column: 1 / 1;
   grid-row: 2 / 2;
   text-align: center;
+  color: rgb(170, 170, 170);
+}
+.post-date {
+  color: rgb(170, 170, 170);
 }
 #filter-container {
   display: grid;
@@ -102,16 +138,17 @@ body {
   grid-column-gap: 20px;
 }
 #filter-collapsible-container {
+  margin-bottom: 40px;
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > h1 {
-  font-size: 20px;
+  font-size: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > p {
-  font-size: 20px;
-  color: gray;
+  color: rgb(170, 170, 170);
+  font-size: 15px;
 }
 #filter-container  > div > p:hover, #filter-container  > div > p.active-filter {
   cursor: pointer;
@@ -143,54 +180,76 @@ body {
 .info-text {
   background: white;
 }
+.tabs {
+  border: 1px solid gray;
+}
 .tab-content {
-  border: 1px solid white;
   padding: 1px;
   height: 450px;
+  background: #282828;
   overflow-y: scroll;
+
+  /* background:
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+  radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background:
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
+  radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat; */
+  /* background-color: white; */
+  /* background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; */
+  /* Opera doesn't support this in the shorthand */
+  /* background-attachment: local, local, scroll, scroll; */
 }
 .tab-content > h1 {
   text-align: center;
 }
 .tab-list {
-  /* display: flex;
-  justify-content: space-evenly; */
-  /* border-bottom: 1px solid white; */
-  margin-bottom: 0px;
+  display: flex;
+  justify-content: space-evenly;
   padding-left: 0;
+  /* padding-bottom: 30px; */
+  margin: 0px;
+  border-bottom: 1px solid gray;
+  background: black;
 }
 .tab-list-item {
+  text-align: center;
   display: inline-block;
   list-style: none;
-  margin-bottom: 0px;
+  margin-bottom: -3px;
   padding: 0.5rem 0.75rem;
   border-radius: 5px 5px 0px 0px;
   font-size: 20px;
   /* border-bottom: 1px solid white; */
   cursor: pointer;
+  flex-grow: 1;
+  flex-basis: 0;
+  color: gray;
 }
 .tab-list-active {
   cursor: pointer;
   font-weight: bolder;
-  border: solid white;
-  border-width: 1px 1px 0 1px;
+  color: white;
+  /* border: solid white; */
+  /* border-width: 1px 1px 1px 1px; */
   /* border-bottom: 0px; */
   filter: brightness(95%);
 }
 .tab-list-active.albums-tab {
-  /* background: rgba(245, 0, 0, 0.75); */
+  border-bottom: 5px solid rgba(245, 0, 0, 0.75);
 }
 .tab-list-active.singles-tab {
-  /* background: rgba(17, 215, 0, 0.75); */
+  border-bottom: 5px solid rgba(17, 215, 0, 0.75);
 }
 .tab-list-active.eps-tab {
-  /* background: rgba(255, 199, 0, 0.75); */
+  border-bottom: 5px solid rgba(255, 199, 0, 0.75);
 }
 .tab-list-active.mixtapes-tab {
-  /* background: rgba(9, 119, 221, 0.75); */
+  border-bottom: 5px solid rgba(9, 119, 221, 0.75);
 }
 .tab-list-active.other-tab {
-  /* background: rgba(107, 47, 184, 0.75); */
+  border-bottom: 5px solid rgba(107, 47, 184, 0.75);
 }
 .badge {
   padding: 1px 9px 2px;
@@ -215,17 +274,21 @@ body {
 }
 .rnb-badge {
   background: rgb(204,0,255);
-  background: linear-gradient(0deg, rgba(204,0,255,1) 0%, rgba(255,0,123,1) 100%);
+  background: linear-gradient(0deg, rgba(204,0,255,1) 5%, rgba(207,48,70,1) 92%);
 }
 .RnBHeads-badge {
   background: rgb(204,0,255);
-  background: linear-gradient(0deg, rgba(204,0,255,1) 0%, rgba(255,0,123,1) 100%);
+  background: linear-gradient(0deg, rgba(204,0,255,1) 5%, rgba(207,48,70,1) 92%);
 }
 .popheads-badge {
   background: #206BFF;
 }
 .mathrock-badge {
   background: #FFA500;
+}
+.no-content {
+  text-align: center;
+  font-size: 20px;
 }
 .post-link {
   background: white;
