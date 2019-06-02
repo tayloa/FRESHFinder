@@ -39,11 +39,16 @@ body {
 .collapsible-header {
    cursor: pointer;
    padding-bottom: 5px;
-   font-size: 20px;
+   font-size: 15px;
    font-weight: bold;
 }
 .collapsible-header p {
+   color: gray;
    margin: 0px;
+}
+.collapsible-header p:hover {
+  /* background: #282828; */
+  color: white;
 }
 .collapsible-content {
   cursor: pointer;
@@ -83,6 +88,10 @@ body {
 .post-container p {
   padding-top: 0px;
   margin: 0px 0px 0px 0px;
+}
+.post-platforms > a:hover, .post-platforms > a {
+  color: white;
+  text-decoration: none;
 }
 .post-title {
   font-style: italic;
@@ -142,13 +151,13 @@ body {
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > h1 {
-  font-size: 15px;
+  font-size: 13px;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
 }
 #filter-container  > div > p {
   color: rgb(170, 170, 170);
-  font-size: 15px;
+  font-size: 14px;
 }
 #filter-container  > div > p:hover, #filter-container  > div > p.active-filter {
   cursor: pointer;

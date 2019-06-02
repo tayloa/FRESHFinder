@@ -1,5 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
+
 
 class Collapsible extends React.Component {
   constructor(props) {
@@ -16,8 +18,8 @@ class Collapsible extends React.Component {
 
    render() {
      return (<div id={this.props.id}>
-       <div onClick={(e)=>this.togglePanel(e)} className="collapsible-header"><FontAwesomeIcon icon={this.props.icon}/>
-       <p>{this.props.title}</p>
+       <div onClick={(e)=>this.togglePanel(e)} className="collapsible-header">
+       <p><FontAwesomeIcon icon={faSlidersH} /> {this.props.title}</p>
      </div>
        {this.state.open ? (<div className="collapsible-content">{this.props.children}</div>) : <div className="collapsible-content hide">{this.props.children}</div>}
      </div>);

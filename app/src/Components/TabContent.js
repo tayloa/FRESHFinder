@@ -94,7 +94,7 @@ class TabContent extends React.Component {
         if (this.state.posts.length === 0) {
           if (this.props.label === "Other") return ( <h1>No unclassified content found.</h1> );
           else {
-              return ( <div class="no-content">
+              return ( <div className="no-content">
                 <span>No {this.props.label.toLowerCase()} found.</span>
               </div> );
           }
@@ -133,7 +133,29 @@ class TabContent extends React.Component {
         // Will display time in 10:30:23 format
         var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
         var dateString = dayNames[date.getDay()] + ", " + date.getDate() + " " + monthNames[date.getMonth()] + ", " +  date.getFullYear() +"  " + formattedTime;
-        console.log(post.domain);
+        // console.log(post.domain);
+
+        var platforms = [];
+        var text = post.selftext.toLowerCase();
+
+        // <a href={post.url} key={"a"}> <FontAwesomeIcon icon={faSpotify} /></a>
+        if (post.domain.includes("spotify") || text.includes("spotify")) {
+          platforms.push(<span key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></span>);
+        }
+        if (post.domain.includes("apple") || text.includes("apple music")) {
+          platforms.push(<span key={"apple"}>  <FontAwesomeIcon icon={faApple} /></span>);
+        }
+        if (post.domain.includes("bandcamp") || text.includes("bandcamp")) {
+          platforms.push(<span key={"bandcamp"}>  <FontAwesomeIcon icon={faBandcamp} /></span>);
+        }
+        if (post.domain.includes("soundcloud") || text.includes("soundcloud")) {
+          platforms.push(<span key={"soundcloud"}>  <FontAwesomeIcon icon={faSoundcloud} /></span>);
+        }
+        if (post.domain.includes("youtube") || post.domain.includes("youtu.be") || text.includes("youtube")) {
+          platforms.push(<span key={"youtube"}>  <FontAwesomeIcon icon={faYoutube} /></span>);
+        }
+
+
         return (
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
@@ -144,7 +166,11 @@ class TabContent extends React.Component {
               <p className="post-title">{title}</p>
               <p className="post-artist">{artist}</p>
               <p> <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span> <span className="post-date">• {dateString}</span></p>
-              <p> <FontAwesomeIcon icon={faSpotify} /> <FontAwesomeIcon icon={faBandcamp} /> <FontAwesomeIcon icon={faApple} /> <FontAwesomeIcon icon={faSoundcloud} /> <FontAwesomeIcon icon={faYoutube} /></p>
+              <p className="post-platforms">
+                {
+                  platforms
+                }
+              </p>
             </div>
           </div>
         )
