@@ -20,10 +20,12 @@ class InfoContainer extends React.Component {
       if (this.props.post) {
         var embedded = null;
         var url = this.props.post.url;
+        var index = 0;
+        var parse = "";
 
         if (this.props.post.url.includes("spotify")) {
-          var index = url.lastIndexOf("/");
-          var parse = url.slice(index+1, url.length);
+          index = url.lastIndexOf("/");
+          parse = url.slice(index+1, url.length);
           if (this.props.post.url.includes("album"))
             embedded = "https://open.spotify.com/embed/album/"+parse;
           if (this.props.post.url.includes("track"))
@@ -32,13 +34,13 @@ class InfoContainer extends React.Component {
         if (this.props.post.url.includes("apple") && this.props.post.url.includes("album")) {
           // src="https://embed.music.apple.com/us/album/she-is-coming/1465295635?app=music">
           // "https://embed.music.apple.com/us/album/mothers-daughter/1465295635?i=1465296236&app=music"></iframe>
-          var index = url.indexOf("album/");
-          var parse = url.slice(index,  url.length);
+          index = url.indexOf("album/");
+          parse = url.slice(index,  url.length);
           embedded = "https://embed.music.apple.com/us/"+parse+"?app=music";
         }
         if (this.props.post.url.includes("youtube") || this.props.post.url.includes("youtu.be")) {
-          var index = url.indexOf("v=");
-          var parse = url.slice(index+2, url.length);
+          index = url.indexOf("v=");
+          parse = url.slice(index+2, url.length);
           embedded = "https://www.youtube.com/embed/"+parse;
         }
         this.setState({ embedded });
@@ -87,7 +89,7 @@ class InfoContainer extends React.Component {
           <div className="content">
             {
               this.state.embedded ?
-                <iframe src={this.state.embedded} width="100%" height="auto" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
+                <iframe title="embedded" src={this.state.embedded} width="100%" height="auto" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
                 <div>Unable to generate preview</div>
             }
           </div>

@@ -23,6 +23,25 @@ class TabContent extends React.Component {
           return filters.subs.indexOf("r/"+post.subreddit) !== -1
         });
       }
+
+      if (filters.platforms.length > 0) {
+        console.log(filters.platforms);
+        posts = posts.filter(function (post) {
+          var text = post.selftext.toLowerCase();
+          var platforms = [];
+          var res = false;
+
+          filters.platforms.forEach((platform) => {
+            platform = platform.toLowerCase();
+            console.log(platform);
+            if (post.domain.includes(platform) || text.includes(platform)) {
+              res = res || true;
+            }
+            res = res || false;
+          });
+          return res;
+        });
+      }
       if (filters.score || filters.date) {
 
         if (filters.score) {
@@ -84,6 +103,7 @@ class TabContent extends React.Component {
 
   handleClick(e) {
       var index = e.currentTarget.dataset.index;
+      // e.currentTarget.className += " selectedPost";
       this.props.onSelectPost(this.state.posts[Number(index)]);
   }
 

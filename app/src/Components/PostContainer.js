@@ -37,7 +37,6 @@ class PostContainer extends React.Component {
   }
 
   handleSelectedFilters = (newFilters) => {
-    console.log(newFilters.platforms);
     this.setState({ loading: true});
     this.setState({ filters: newFilters }, () => {
       this.setState({ loading: false });
