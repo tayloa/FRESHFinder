@@ -11,11 +11,6 @@ var options = {
 }
 const r = new snoowrap(options);
 
-// See any recent leaks
-router.get('/search/:subreddit/leaks', function(req, res) {
-  // [LEAK]
-});
-
 // Get [FRESH] posts from a specific subreddit
 router.get('/search/:subreddit', function(req, res) {
   var albums = [];

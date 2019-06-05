@@ -37,17 +37,22 @@ class PostContainer extends React.Component {
   }
 
   handleSelectedFilters = (newFilters) => {
+    console.log(newFilters.platforms);
     this.setState({ loading: true});
     this.setState({ filters: newFilters }, () => {
       this.setState({ loading: false });
     });
   }
 
+  handleClosePost = () => {
+    this.setState({ selected: null });
+  }
   render() {
     return (
       <div id="main-container">
-        <FilterContainer onSelectFilters={this.handleSelectedFilters}/>
         <div id="posts-container">
+          <InfoContainer closePost={this.handleClosePost} post={this.state.selected}/>
+          <FilterContainer onSelectFilters={this.handleSelectedFilters}/>
           <Tabs>
             <div label="Albums">
                { this.state.loading ?
@@ -81,7 +86,6 @@ class PostContainer extends React.Component {
             </div>
           </Tabs>
         </div>
-        <InfoContainer post={this.state.selected}/>
       </div>
     );
   }

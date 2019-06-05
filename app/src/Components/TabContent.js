@@ -5,8 +5,7 @@ import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp } from "@fortaw
 
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+  "July", "August", "September", "October", "November", "December"];
 
 class TabContent extends React.Component {
 
@@ -138,7 +137,6 @@ class TabContent extends React.Component {
         var platforms = [];
         var text = post.selftext.toLowerCase();
 
-        // <a href={post.url} key={"a"}> <FontAwesomeIcon icon={faSpotify} /></a>
         if (post.domain.includes("spotify") || text.includes("spotify")) {
           platforms.push(<span key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></span>);
         }

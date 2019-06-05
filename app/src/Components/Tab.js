@@ -34,7 +34,7 @@ class Tab extends Component {
         className={className}
         onClick={onClick}
       >
-        {label}
+        <span>{label}</span>
       </li>
     );
   }
