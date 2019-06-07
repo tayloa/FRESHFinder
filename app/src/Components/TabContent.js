@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
+import Emoji from 'a11y-react-emoji';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp } from "@fortawesome/free-brands-svg-icons";
 
@@ -25,19 +26,21 @@ class TabContent extends React.Component {
       }
 
       if (filters.platforms.length > 0) {
-        console.log(filters.platforms);
         posts = posts.filter(function (post) {
-          var text = post.selftext.toLowerCase();
-          var platforms = [];
-          var res = false;
+        var text = post.selftext.toLowerCase();
+        var res = false;
 
-          filters.platforms.forEach((platform) => {
-            platform = platform.toLowerCase();
-            console.log(platform);
-            if (post.domain.includes(platform) || text.includes(platform)) {
-              res = res || true;
-            }
+        filters.platforms.forEach((platform) => {
+          platform = platform.toLowerCase();
+          if (platform === "apple music" && ((post.domain.includes("apple") || text.includes("apple")))) {
+            res = res || true;
+          }
+          else if (post.domain.includes(platform) || text.includes(platform)) {
+            res = res || true;
+          }
+          else {
             res = res || false;
+          }
           });
           return res;
         });
@@ -136,10 +139,6 @@ class TabContent extends React.Component {
             title = parsed[1];
           }
         }
-        // TODO: Add flame emoji for posts with 1,000+ upvotes
-        // if (post.score > 1000) {
-        //   score += &#128293;
-        // }
 
         // Convert date to format
         var date = new Date(post.created_utc*1000);
@@ -157,9 +156,6 @@ class TabContent extends React.Component {
         var platforms = [];
         var text = post.selftext.toLowerCase();
 
-        if (post.domain.includes("spotify") || text.includes("spotify")) {
-          platforms.push(<span key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></span>);
-        }
         if (post.domain.includes("apple") || text.includes("apple music")) {
           platforms.push(<span key={"apple"}>  <FontAwesomeIcon icon={faApple} /></span>);
         }
@@ -168,6 +164,9 @@ class TabContent extends React.Component {
         }
         if (post.domain.includes("soundcloud") || text.includes("soundcloud")) {
           platforms.push(<span key={"soundcloud"}>  <FontAwesomeIcon icon={faSoundcloud} /></span>);
+        }
+        if (post.domain.includes("spotify") || text.includes("spotify")) {
+          platforms.push(<span key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></span>);
         }
         if (post.domain.includes("youtube") || post.domain.includes("youtu.be") || text.includes("youtube")) {
           platforms.push(<span key={"youtube"}>  <FontAwesomeIcon icon={faYoutube} /></span>);
@@ -178,7 +177,7 @@ class TabContent extends React.Component {
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
                 <img src="vinyl.png" alt="album-art"></img>
-                <div className="post-score">{score}</div>
+                <div className="post-score">{score} {(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null}</div>
             </div>
             <div className="post-info">
               <p className="post-title">{title}</p>

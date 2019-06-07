@@ -14,11 +14,11 @@ body {
   font-family: 'Permanent Marker', cursive;
 }
 #heading > h1 {
-  font-size: 80px;
+  font-size: 50px;
   margin-bottom: 0px;
 }
 #heading > span {
-  font-size: 20px;
+  font-size: 10px;
 }
 #main-container {
   padding: 20px;
@@ -109,8 +109,18 @@ body {
   margin: 0px 0px 0px 0px;
 }
 .post-platforms > a:hover, .post-platforms > a {
-  color: white;
+  color: gray;
   text-decoration: none;
+  margin: 0px 0px 5px 0px;
+}
+#info-container > .content > .post-platforms {
+  margin: 0px auto 0px auto;
+}
+#info-container > .content > .post-platforms > a:hover {
+  color: white;
+}
+#info-container > .content > .post-platforms > a:last-child {
+  float: right;
 }
 .post-title {
   font-style: italic;
@@ -155,6 +165,9 @@ body {
   grid-row: 2 / 2;
   text-align: center;
   color: rgb(170, 170, 170);
+}
+.post-score > span {
+  color: orange;
 }
 .post-date {
   color: rgb(170, 170, 170);
@@ -222,6 +235,27 @@ body {
 }
 .tab-content > h1 {
   text-align: center;
+}
+/* width */
+.tab-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.tab-content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.tab-content::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.tab-content::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
 }
 .tab-list {
   display: flex;

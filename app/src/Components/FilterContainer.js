@@ -101,7 +101,7 @@ class FilterContainer extends React.Component {
               <p>Last Hour</p>
               <p>Today</p>
               <p>This week</p>
-              <p>THis month</p>
+              <p>This month</p>
               <p>This year</p>
             </div>
             <div className="subreddit-filter">
