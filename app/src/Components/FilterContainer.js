@@ -97,7 +97,7 @@ class FilterContainer extends React.Component {
         <Collapsible id="filter-collapsible-container" title="FILTER" icon="sliders">
           <div id="filter-container">
             <div className="release-filter">
-              <h1>DATE RANGE</h1>
+              <h1>TIME</h1>
               <p>Last Hour</p>
               <p>Today</p>
               <p>This week</p>
