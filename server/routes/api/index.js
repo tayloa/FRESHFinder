@@ -10,97 +10,102 @@ var options = {
   userAgent: "FRESHBot"
 }
 const r = new snoowrap(options);
+const timeOptions = ["hour", "day", "week", "month", "year", "all"];
 
 // Get [FRESH] posts from a specific subreddit
-router.get('/search/:subreddit', function(req, res) {
-  var albums = [];
-  var eps = [];
-  var mixtapes = [];
-  var videos = [];
-  var singles = [];
-  var other =[];
-
-  const options = {
-    subreddit: req.params.subreddit,
-    query: "[FRESH ",
-    sort: "relevance",
-    time: "week"
-  }
-
-  // Sort FRESH postsby type
-  r.search(options).then(response => {
-    response.forEach(function(post) {
-      if (post.title.includes("ALBUM]")) {
-        albums.push(post);
-      }
-      else if (post.title.includes("MIXTAPE]")) {
-        mixtapes.push(post);
-      }
-      else if (post.title.includes("EP]")) {
-        eps.push(post);
-      }
-      else if (post.title.includes("VIDEO]")) {
-        videos.push(post);
-      }
-      else if (post.title.includes("[FRESH]")) {
-        singles.push(post);
-      }
-      // Unknown type
-      else {
-        other.push(post);
-      }
-    });
-    var results =  {
-      albums: albums,
-      eps: eps,
-      mixtapes: mixtapes,
-      videos: videos,
-      singles: singles,
-      other: other
-    }
-    res.json(results);
-  });
-});
+// router.get('/search/:subreddit', function(req, res) {
+//   var albums = [];
+//   var eps = [];
+//   var mixtapes = [];
+//   var videos = [];
+//   var singles = [];
+//   var other =[];
+//
+//   const options = {
+//     subreddit: req.params.subreddit,
+//     query: "[FRESH ",
+//     sort: "relevance",
+//     time: "week"
+//   }
+//
+//   // Sort FRESH postsby type
+//   r.search(options).then(response => {
+//     response.forEach(function(post) {
+//       if (post.title.includes("ALBUM]")) {
+//         albums.push(post);
+//       }
+//       else if (post.title.includes("MIXTAPE]")) {
+//         mixtapes.push(post);
+//       }
+//       else if (post.title.includes("EP]")) {
+//         eps.push(post);
+//       }
+//       else if (post.title.includes("VIDEO]")) {
+//         videos.push(post);
+//       }
+//       else if (post.title.includes("[FRESH]")) {
+//         singles.push(post);
+//       }
+//       // Unknown type
+//       else {
+//         other.push(post);
+//       }
+//     });
+//     var results =  {
+//       albums: albums,
+//       eps: eps,
+//       mixtapes: mixtapes,
+//       videos: videos,
+//       singles: singles,
+//       other: other
+//     }
+//     res.json(results);
+//   });
+// });
 
 // Get [FRESH] posts from all subreddits
-router.get('/search', function(req, res) {
+router.get('/search/:time?', function(req, res) {
   var albums = [];
   var eps = [];
   var mixtapes = [];
   var videos = [];
   var singles = [];
   var other =[];
+  var time = req.params.time;
+  if (!time || (!timeOptions.includes(time))) {
+    time = "week";
+  }
 
   var allOptions = [
     {
       subreddit: "HipHopHeads",
       query: "[FRESH ",
       sort: "relevance",
-      time: "week"
+      time: time
     }
     ,{
       subreddit: "RnBHeads",
       query: "[FRESH ",
       sort: "relevance",
-      time: "week"
+      time: time
     }
     ,{
       subreddit: "rnb",
       query: "[FRESH ",
       sort: "relevance",
-      time: "week"
+      time: time
     }
     ,{
       subreddit: "PopHeads",
       query: "[FRESH ",
       sort: "relevance",
-      time: "week"
+      time: time
     }
     ,{
       subreddit: "indieheads",
       query: "[FRESH ",
       sort: "relevance",
-      time: "week"
+      time: time
     }
   ];
 

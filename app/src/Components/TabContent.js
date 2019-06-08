@@ -177,18 +177,14 @@ class TabContent extends React.Component {
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
                 <img src="vinyl.png" alt="album-art"></img>
-                <div className="post-score">{score} {(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null}</div>
             </div>
             <div className="post-info">
               <p className="post-title">{title}</p>
               <p className="post-artist">{artist}</p>
-              <p> <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span> <span className="post-date">• {dateString}</span></p>
-              <p className="post-platforms">
-                {
-                  platforms
-                }
-              </p>
+              <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span>
             </div>
+            <div className="post-score">{score} {(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null}</div>
+            <p><span className="post-date">{dateString}</span></p>
           </div>
         )
       });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp } from "@fortawesome/free-brands-svg-icons";
-import { faTimesCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp, faReddit } from "@fortawesome/free-brands-svg-icons";
+import { faWindowClose, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 class InfoContainer extends React.Component {
 
@@ -139,7 +139,7 @@ class InfoContainer extends React.Component {
 
       return (
         <div id="info-container">
-          <span onClick={this.closePost}><FontAwesomeIcon icon={faTimesCircle} /></span>
+          <span onClick={this.closePost}><FontAwesomeIcon icon={faWindowClose} /></span>
           <div className="content">
             {
               this.state.embedded ?
@@ -147,10 +147,12 @@ class InfoContainer extends React.Component {
                 <div>Unable to generate preview</div>
             }
             <p className="post-platforms">
+              Links:
               {
                 platforms
               }
               <a href={"https://www.reddit.com"+ this.state.post.permalink}> <FontAwesomeIcon icon={faExternalLinkAlt} /></a>
+              <a href={"https://www.reddit.com"+ this.state.post.permalink}><FontAwesomeIcon icon={faReddit} /></a>
             </p>
           </div>
         </div>
