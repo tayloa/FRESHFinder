@@ -5,7 +5,8 @@ function App() {
   return (
     <div id="page-frame">
       <div id="heading">
-        <h1>[FRESH]Finder</h1>
+        <span className="logo">[FRESH]Finder</span>
+        <br></br>
         <span>+ Music releases supplied by Reddit +</span>
       </div>
       <PostContainer />

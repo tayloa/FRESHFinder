@@ -6,7 +6,7 @@ body {
   /* background: #282828; */
   /* background: rgb(101,100,100);
   background: linear-gradient(0deg, rgba(101,100,100,1) 0%, rgba(40,40,40,1) 60%); */
-  background: black;
+  background: #111111;
   color: white;
 }
 #heading {
@@ -14,11 +14,14 @@ body {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
 }
-#heading > h1 {
+#heading > .logo {
   font-size: 50px;
   margin-bottom: 0px;
+  color: white;
+  font-weight: bold;
 }
 #heading > span {
+  color: gray;
   font-size: 15px;
 }
 #main-container {
@@ -36,11 +39,7 @@ body {
 }
 #info-container {
   width: 100%;
-  /* margin-left: inherit; */
   color: white;
-  /* background: #282828; */
-  /* border: 1px solid gray; */
-  /* padding: 10px; */
   height: auto;
   overflow: hidden;
   margin-bottom: 20px;
@@ -96,7 +95,8 @@ body {
 .post-container {
   width: 100%;
   color: white;
-  background: black;
+  background: #111;
+  background: #282828;
   display: grid;
   grid-template-rows: 3fr 20px;
   grid-template-columns: 2fr 10fr;
@@ -226,7 +226,8 @@ body {
 .tab-content {
   padding: 1px;
   height: 450px;
-  background: #282828;
+  /* background: #282828; */
+  background: black;
   overflow-y: scroll;
 }
 .tab-content > h1 {
@@ -245,14 +246,10 @@ body {
 
 /* Handle */
 .tab-content::-webkit-scrollbar-thumb {
-  background: red;
+  background: #ff4301;
   border-radius: 10px;
 }
 
-/* Handle on hover */
-.tab-content::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
-}
 .tab-list {
   display: flex;
   justify-content: space-evenly;

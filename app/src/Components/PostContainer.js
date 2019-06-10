@@ -20,7 +20,7 @@ class PostContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.serverRequest = axios.get('http://localhost:8080/api/search')
+    this.serverRequest = axios.get(`http://localhost:8080/api/search/${this.state.filters ? this.state.filters.time : ""}`)
       .then(res => {
             var posts = res.data;
             this.setState({ posts });
@@ -39,6 +39,12 @@ class PostContainer extends React.Component {
   handleSelectedFilters = (newFilters) => {
     this.setState({ loading: true});
     this.setState({ filters: newFilters }, () => {
+      axios.get(`http://localhost:8080/api/search/${this.state.filters.time}`)
+        .then(res => {
+              var posts = res.data;
+              this.setState({ posts });
+              this.setState({ loading: false });
+        })
       this.setState({ loading: false });
     });
   }

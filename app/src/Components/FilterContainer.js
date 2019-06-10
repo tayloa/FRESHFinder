@@ -9,27 +9,39 @@ class FilterContainer extends React.Component {
       releaseRange: [],
       subs: [],
       score: false,
-      date: false,
+      time: "week",
       platforms: []
     };
+    this.handleTimeClick = this.handleTimeClick.bind(this);
+    this.handleSubClick = this.handleSubClick.bind(this);
+    this.handleScoreClick = this.handleScoreClick.bind(this);
+    this.handlePlatformClick = this.handlePlatformClick.bind(this);
+
   }
 
-  handleDateClick = (e) => {
-      var text = e.currentTarget.textContent;
-      if (!this.state.date) {
-        this.setState( {date: true}, () => {
+  handleTimeClick = (e) => {
+    var oldTime = this.state.time;
+    var newTime = e.target.dataset.time;
+    if (e.target.textContent !== "TIME") {
+      if (newTime !== oldTime) {
+        var objs = Array.prototype.slice.call( e.currentTarget.children );
+        var oldIndex = objs.findIndex( function(item, i) {
+          return item.dataset.time === oldTime;
+        });
+        var newIndex = objs.findIndex( function(item, i) {
+          return item.dataset.time === newTime;
+        });
+        var oldText = e.currentTarget.children[oldIndex].textContent;
+        var newText = e.currentTarget.children[newIndex].textContent;
+        e.currentTarget.children[oldIndex].textContent = oldText.slice( 0, oldText.length - 2);
+        e.currentTarget.children[oldIndex].className = "";
+        e.currentTarget.children[newIndex].textContent = newText + " X";
+        e.currentTarget.children[newIndex].className = "active-filter";
+        this.setState({ time: newTime }, () => {
           this.props.onSelectFilters(this.state);
         });
-        e.currentTarget.textContent = e.currentTarget.textContent + " X";
-        e.currentTarget.className = "active-filter";
-      } else {
-        text = text.slice( 0, text.length - 2);
-        this.setState( {date: false}, () => {
-          this.props.onSelectFilters(this.state);
-        });
-        e.currentTarget.textContent = text;
-        e.currentTarget.className = "";
       }
+    }
   }
 
   handleSubClick = (e) => {
@@ -96,13 +108,14 @@ class FilterContainer extends React.Component {
     return(
         <Collapsible id="filter-collapsible-container" title="FILTER" icon="sliders">
           <div id="filter-container">
-            <div className="release-filter">
+            <div className="release-filter" onClick={this.handleTimeClick}>
               <h1>TIME</h1>
-              <p>Last Hour</p>
-              <p>Today</p>
-              <p>This week</p>
-              <p>This month</p>
-              <p>This year</p>
+              <p data-time="hour" data-selected={false}>Last Hour</p>
+              <p data-time="day" data-selected={false}>Today</p>
+              <p className="active-filter" data-time="week" data-selected={true}>This week X</p>
+              <p data-time="month" data-selected={false}>This month</p>
+              <p data-time="year" data-selected={false}>This year</p>
+              <p data-time="all" data-selected={false}>All Time</p>
             </div>
             <div className="subreddit-filter">
               <h1>SUBREDDIT</h1>
@@ -120,11 +133,11 @@ class FilterContainer extends React.Component {
             </div>
             <div className="platform-filter">
               <h1>PLATFORM</h1>
-              <p onClick={this.handlePlatformClick}>Apple Music</p>
-              <p onClick={this.handlePlatformClick}>Bandcamp</p>
-              <p onClick={this.handlePlatformClick}>SoundCloud</p>
-              <p onClick={this.handlePlatformClick}>Spotify</p>
-              <p onClick={this.handlePlatformClick}>YouTube</p>
+              <p data-platform="apple" onClick={this.handlePlatformClick}>Apple Music</p>
+              <p data-platform="bandcamp" onClick={this.handlePlatformClick}>Bandcamp</p>
+              <p data-platform="soundcloud" onClick={this.handlePlatformClick}>SoundCloud</p>
+              <p data-platform="spotify" onClick={this.handlePlatformClick}>Spotify</p>
+              <p data-platform="youtube" onClick={this.handlePlatformClick}>YouTube</p>
             </div>
           </div>
         </Collapsible>
