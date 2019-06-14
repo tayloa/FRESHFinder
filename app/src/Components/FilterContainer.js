@@ -22,7 +22,7 @@ class FilterContainer extends React.Component {
   handleTimeClick = (e) => {
     var oldTime = this.state.time;
     var newTime = e.target.dataset.time;
-    if (e.target.textContent !== "TIME") {
+    if (e.target.textContent !== "TIME" && e.target.nodeName !== "DIV") {
       if (newTime !== oldTime) {
         var objs = Array.prototype.slice.call( e.currentTarget.children );
         var oldIndex = objs.findIndex( function(item, i) {
@@ -111,10 +111,10 @@ class FilterContainer extends React.Component {
             <div className="release-filter" onClick={this.handleTimeClick}>
               <h1>TIME</h1>
               <p data-time="hour" data-selected={false}>Last Hour</p>
-              <p data-time="day" data-selected={false}>Today</p>
-              <p className="active-filter" data-time="week" data-selected={true}>This week X</p>
-              <p data-time="month" data-selected={false}>This month</p>
-              <p data-time="year" data-selected={false}>This year</p>
+              <p data-time="day" data-selected={false}>Last 24 Hours</p>
+              <p className="active-filter" data-time="week" data-selected={true}>Last 7 Days X</p>
+              <p data-time="month" data-selected={false}>Last Month</p>
+              <p data-time="year" data-selected={false}>Last Year</p>
               <p data-time="all" data-selected={false}>All Time</p>
             </div>
             <div className="subreddit-filter">

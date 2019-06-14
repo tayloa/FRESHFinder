@@ -17,15 +17,20 @@ class PostContainer extends React.Component {
       selected: null,
       posts: null
     };
+    this.serverRequest = this.serverRequest.bind(this);
   }
 
-  componentDidMount() {
-    this.serverRequest = axios.get(`http://localhost:8080/api/search/${this.state.filters ? this.state.filters.time : ""}`)
+  serverRequest = () => {
+    axios.get(`http://localhost:8080/api/search/${this.state.filters ? this.state.filters.time : ""}`)
       .then(res => {
             var posts = res.data;
             this.setState({ posts });
             this.setState({ loading: false });
-      })
+      });
+  }
+
+  componentDidMount() {
+    this.serverRequest();
   }
 
   componentWillUnmount() {
@@ -37,15 +42,9 @@ class PostContainer extends React.Component {
   }
 
   handleSelectedFilters = (newFilters) => {
-    this.setState({ loading: true});
+    this.setState({ loading: true });
     this.setState({ filters: newFilters }, () => {
-      axios.get(`http://localhost:8080/api/search/${this.state.filters.time}`)
-        .then(res => {
-              var posts = res.data;
-              this.setState({ posts });
-              this.setState({ loading: false });
-        })
-      this.setState({ loading: false });
+      this.serverRequest();
     });
   }
 

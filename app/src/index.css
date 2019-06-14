@@ -6,8 +6,12 @@ body {
   /* background: #282828; */
   /* background: rgb(101,100,100);
   background: linear-gradient(0deg, rgba(101,100,100,1) 0%, rgba(40,40,40,1) 60%); */
-  background: #111111;
+
+  background: black;
   color: white;
+}
+abbr {
+  text-decoration: none;
 }
 #heading {
   margin-top: 20px;
@@ -58,6 +62,9 @@ body {
   overflow-y: scroll;
   box-sizing: content-box;
 }
+.center {
+  text-align: center;
+}
 .info-text {
   /* background: white; */
 }
@@ -100,12 +107,9 @@ body {
   display: grid;
   grid-template-rows: 3fr 20px;
   grid-template-columns: 2fr 10fr;
-  grid-column-gap: 2fr;
   padding: 10px 0px 20px 0px;
   font-size: 15px;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 .post-container:first-child {
   border-top: 0px;
@@ -114,10 +118,32 @@ body {
   padding-top: 0px;
   margin: 0px 0px 0px 0px;
 }
-.post-platforms > a:hover, .post-platforms > a {
+.post-platforms {
+  float: right;
+}
+.post-platforms > abbr {
+  color: gray;
+  margin: 0px 5px 0px 5px;
+  font-size: 1.2em;
+}
+.post-platforms > abbr > a:hover, .post-platforms > abbr > a {
   color: gray;
   text-decoration: none;
-  margin: 0px 0px 5px 0px;
+}
+.post-platforms:first-child {
+  margin-left: 0px;
+}
+.post-platforms > abbr > a:hover {
+  color: white;
+}
+.close-button {
+  color: gray
+}
+.close-button:hover {
+  color: white;
+}
+#info-container {
+  border-bottom: 0.5px solid gray;
 }
 #info-container > .content > .post-platforms {
   margin: 0px auto 0px auto;
@@ -135,7 +161,7 @@ body {
 .post-artist {
   font-weight: lighter;
 }
-.post-container:hover > .post-image > img {
+.post-container:hover > .post-image > .album-art {
   -webkit-transition: -webkit-transform .8s ease-in-out;
           transition:         transform .8s ease-in-out;
   -webkit-transform: rotate(360deg);
@@ -149,12 +175,23 @@ body {
   align-content: center;
 }
 .post-image img {
+  cursor: pointer;
   margin-top: 10px;
   border-radius: 40px;
   min-width: 50px;
   min-height: 50px;
   max-height: 70px;
   max-width: 70px;
+  padding: 0px;
+  border: 1px solid white;
+}
+.post-image > svg {
+  padding: 0px;
+  color: red;
+  background: white;
+  margin: 0 auto;
+  font-size: 40px;
+
 }
 .post-info {
   line-height: 1.7;
@@ -241,22 +278,23 @@ body {
 /* Track */
 .tab-content::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 /* Handle */
 .tab-content::-webkit-scrollbar-thumb {
   background: #ff4301;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .tab-list {
   display: flex;
   justify-content: space-evenly;
   padding-left: 0;
-  margin: 0px;
+  margin: 0px 0px 2px 0px;
   border-bottom: 1px solid gray;
-  background: black;
+  /* background: black; */
+  background: #111111;
 }
 .tab-list-item {
   text-align: center;
@@ -264,6 +302,7 @@ body {
   list-style: none;
   margin-bottom: -3px;
   padding: 0.5rem 0.75rem;
+  padding-bottom: 0px;
   border-radius: 5px 5px 0px 0px;
   font-size: 20px;
   cursor: pointer;
@@ -275,153 +314,35 @@ body {
   cursor: pointer;
   font-weight: bolder;
   color: white;
-  filter: brightness(95%);
 }
-.albums-tab:after {
+.tab-list-item:after {
+  margin-top: 5px;
   content: '';
   position: relative;
-  width: 0; height: 5px;
+  width: 0; height: 3px;
   display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
   right: 0;
-  background: rgba(245, 0, 0, 0.75);
+  background: #ff4301;
   transition: width .2s ease;
   -webkit-transition: width .2s ease;
 }
-.albums-tab:hover:after {
+.tab-list-item:hover:after {
   color: white;
   width: 100%;
   left: 0;
-  background: rgba(245, 0, 0, 0.75);
+  background: #ff4301;
 }
-.tab-list-active.albums-tab:after {
+.tab-list-active:after {
+  margin-top: 5px;
   content: '';
   position: relative;
-  width: 100%; height: 5px;
+  width: 100%; height: 3px;
   display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
   left: 0;
   right: 0;
-  background: rgba(245, 0, 0, 0.75);
+  background: #ff4301;
 }
-.singles-tab:after {
-  content: '';
-  position: relative;
-  width: 0; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  right: 0;
-  background: rgba(17, 215, 0, 0.75);
-  transition: width .2s ease;
-  -webkit-transition: width .2s ease;
-}
-.singles-tab:hover:after{
-  color: white;
-  width: 100%;
-  left: 0;
-  background: rgba(17, 215, 0, 0.75);
-}
-.tab-list-active.singles-tab:after {
-  content: '';
-  position: relative;
-  width: 100%; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  left: 0;
-  right: 0;
-  background: rgba(17, 215, 0, 0.75);
-}
-.eps-tab:after {
-  content: '';
-  position: relative;
-  width: 0; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  right: 0;
-  background: rgba(255, 199, 0, 0.75);
-  transition: width .2s ease;
-  -webkit-transition: width .2s ease;
-}
-.eps-tab:hover:after{
-  color: white;
-  width: 100%;
-  left: 0;
-  background: rgba(255, 199, 0, 0.75);
-}
-.tab-list-active.eps-tab:after {
-  content: '';
-  position: relative;
-  width: 100%; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  left: 0;
-  right: 0;
-  background: rgba(255, 199, 0, 0.75);
-}
-.mixtapes-tab:after {
-  content: '';
-  position: relative;
-  width: 0; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  right: 0;
-  background: rgba(9, 119, 221, 0.75);
-  transition: width .2s ease;
-  -webkit-transition: width .2s ease;
-}
-.mixtapes-tab:hover:after{
-  color: white;
-  width: 100%;
-  left: 0;
-  background: rgba(9, 119, 221, 0.75);
-}
-.tab-list-active.mixtapes-tab:after {
-  content: '';
-  position: relative;
-  width: 100%; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  left: 0;
-  right: 0;
-  background: rgba(9, 119, 221, 0.75);
-}
-.other-tab:after {
-  content: '';
-  position: relative;
-  width: 0; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  right: 0;
-  background: rgba(107, 47, 184, 0.75);
-  transition: width .2s ease;
-  -webkit-transition: width .2s ease;
-}
-.other-tab:hover:after{
-  color: white;
-  width: 100%;
-  left: 0;
-  background: rgba(107, 47, 184, 0.75);
-}
-.tab-list-active.other-tab:after {
-  content: '';
-  position: relative;
-  width: 100%; height: 5px;
-  display: block;
-  margin-top: 3px;
-  margin-bottom: -10px;
-  left: 0;
-  right: 0;
-  background: rgba(107, 47, 184, 0.75);
-}
+
 .badge {
   padding: 1px 9px 2px;
   font-size: 10px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify, faSoundcloud, faYoutube, faApple, faBandcamp, faReddit } from "@fortawesome/free-brands-svg-icons";
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +15,8 @@ class InfoContainer extends React.Component {
     this.state =  {
       post: this.props.post,
       links: [],
-      embedded: null
+      embedded: null,
+      loading: true
     }
   }
 
@@ -25,6 +27,10 @@ class InfoContainer extends React.Component {
       return parsed[0];
     });
     return res;
+  }
+
+  hideSpinner = () => {
+    this.setState({ loading: false })
   }
 
   getEmbeddedLink(url) {
@@ -44,8 +50,6 @@ class InfoContainer extends React.Component {
           embedded = "https://open.spotify.com/embed/track/"+parse;
       }
       if (url.includes("apple") && url.includes("album")) {
-        // src="https://embed.music.apple.com/us/album/she-is-coming/1465295635?app=music">
-        // "https://embed.music.apple.com/us/album/mothers-daughter/1465295635?i=1465296236&app=music"></iframe>
         index = url.indexOf("album/");
         parse = url.slice(index,  url.length);
         embedded = "https://embed.music.apple.com/us/"+parse+"?app=music";
@@ -67,26 +71,26 @@ class InfoContainer extends React.Component {
 
   generateIcon(url) {
     if (url.includes("spotify")) {
-      return (<a href={url} key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></a>);
+      return (<abbr title="Spotify" key={"spotify"}> <a href={url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
     }
     if (url.includes("apple")) {
-      return (<a href={url} key={"apple"}>  <FontAwesomeIcon icon={faApple} /></a>);
+      return (<abbr title="Apple Music" key={"apple"}> <a href={url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
     }
     if (url.includes("bandcamp")) {
-      return (<a href={url} key={"bandcamp"}>  <FontAwesomeIcon icon={faBandcamp} /></a>);
+      return (<abbr title="Bandcamp" key={"bandcamp"}> <a href={url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
     }
     if (url.includes("soundcloud")) {
-      return (<a href={url} key={"soundcloud"}>  <FontAwesomeIcon icon={faSoundcloud} /></a>);
+      return (<abbr title="Soundcloud" key={"soundcloud"}> <a href={url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
     }
     if (url.includes("youtube")) {
-      return (<a href={url} key={"youtube"}>  <FontAwesomeIcon icon={faYoutube} /></a>);
+      return (<abbr title="YouTube" key={"youtube"}> <a href={url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
     }
     return null;
   }
 
 
   closePost() {
-    this.setState({ post: null });
+    this.setState({ post: null, loading: true });
     this.props.closePost();
   }
 
@@ -122,41 +126,47 @@ class InfoContainer extends React.Component {
       var post = this.state.post;
       var platforms  = this.state.links.map( this.generateIcon );
       if (post.url.includes("apple")) {
-        platforms.push(<a href={post.url} key={"apple"}>  <FontAwesomeIcon icon={faApple} /></a>);
+        platforms.push(<abbr title="Apple Music" key={"apple"}><a href={post.url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
       }
       if (post.url.includes("bandcamp")) {
-        platforms.push(<a href={post.url} key={"bandcamp"}>  <FontAwesomeIcon icon={faBandcamp} /></a>);
+        platforms.push(<abbr title="Bandcamp" key={"bandcamp"}><a href={post.url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
       }
       if (post.url.includes("soundcloud")) {
-        platforms.push(<a href={post.url} key={"soundcloud"}>  <FontAwesomeIcon icon={faSoundcloud} /></a>);
+        platforms.push(<abbr title="Soundcloud" key={"soundcloud"}><a href={post.url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
       }
       if (post.url.includes("spotify")) {
-        platforms.push(<a href={post.url} key={"spotify"}>  <FontAwesomeIcon icon={faSpotify} /></a>);
+        platforms.push(<abbr title="Spotify" key={"spotify"}><a href={post.url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
       }
       if (post.url.includes("youtube")) {
-        platforms.push(<a href={post.url} key={"youtube"}>  <FontAwesomeIcon icon={faYoutube} /></a>);
+        platforms.push(<abbr title="YouTube" key={"youtube"}><a href={post.url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
       }
+      platforms.push(<abbr title="Reddit" key={"reddit"}><a href={"https://www.reddit.com"+ this.state.post.permalink}><FontAwesomeIcon icon={faReddit} /></a></abbr>);
 
       return (
-        <div id="info-container">
-          <span onClick={this.closePost}><FontAwesomeIcon icon={faWindowClose} /></span>
-          <div className="content">
-            {
-              this.state.embedded ?
-                <iframe title="embedded" src={this.state.embedded} width="100%" height="auto" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
-                <div>Unable to generate preview</div>
-            }
-            <p className="post-platforms">
-              Links:
+        <div>
+          <span className="close-button" onClick={this.closePost}><FontAwesomeIcon icon={faWindowClose} /></span>
+          <div id="info-container">
+            <div className="content">
               {
-                platforms
+                this.state.loading ?
+                  <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"25%"} width={"25%"} /> :
+                      null
               }
-              <a href={"https://www.reddit.com"+ this.state.post.permalink}><FontAwesomeIcon icon={faReddit} /></a>
-            </p>
+              {
+                this.state.embedded ?
+                <iframe title="embedded" src={this.state.embedded} onLoad={this.hideSpinner} width="100%" height="auto" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
+                   <div className="center">Unable to generate preview</div>
+              }
+
+              <p className="post-platforms">
+                {
+                  platforms
+                }
+              </p>
+            </div>
           </div>
         </div>
       )
-
     }
     // <p className="info-text">{title}</p>
     // <p className="info-text">{post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>

@@ -114,7 +114,9 @@ class TabContent extends React.Component {
       if (this.state.posts) {
 
         if (this.state.posts.length === 0) {
-          if (this.props.label === "Other") return ( <h1>No unclassified content found.</h1> );
+          if (this.props.label === "Other") return ( <div className="no-content">
+            <span>No unclassified content found.</span>
+          </div> );
           else {
               return ( <div className="no-content">
                 <span>No {this.props.label.toLowerCase()} found.</span>
@@ -176,12 +178,16 @@ class TabContent extends React.Component {
         return (
           <div className="post-container" key={index} data-index={index} onClick={this.handleClick}>
             <div className="post-image">
-                <img src="vinyl.png" alt="album-art"></img>
+              {
+                (post.domain.includes("youtube") || post.domain.includes("youtu.be")) ?
+                <FontAwesomeIcon icon={faYoutube} /> :
+                <img src="vinyl.png" className="album-art" alt="album-art"></img>
+              }
             </div>
             <div className="post-info">
-              <p className="post-title">{title}</p>
+              <abbr title={title}><p className="post-title">{title}</p></abbr>
               <p className="post-artist">{artist}</p>
-              <span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span>
+              <abbr title={"r/"+post.subreddit}><span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span></abbr>
             </div>
             <div className="post-score">{score} {(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null}</div>
             <p><span className="post-date">{dateString}</span></p>
