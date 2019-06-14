@@ -180,7 +180,7 @@ class TabContent extends React.Component {
             <div className="post-image">
               {
                 (post.domain.includes("youtube") || post.domain.includes("youtu.be")) ?
-                <FontAwesomeIcon icon={faYoutube} /> :
+                <img src="video.png" className="video-art" alt="video-art"></img> :
                 <img src="vinyl.png" className="album-art" alt="album-art"></img>
               }
             </div>
