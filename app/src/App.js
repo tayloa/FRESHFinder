@@ -1,5 +1,7 @@
 import React from 'react';
 import PostContainer from './Components/PostContainer';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function App() {
   return (

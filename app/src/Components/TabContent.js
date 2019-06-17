@@ -189,7 +189,7 @@ class TabContent extends React.Component {
               <p className="post-artist">{artist}</p>
               <abbr title={"r/"+post.subreddit}><span className={post.subreddit + "-badge badge"}>r/{post.subreddit}</span></abbr>
             </div>
-            <div className="post-score">{score} {(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null}</div>
+            <div className="post-score">{(post.score > 1000) ? <Emoji symbol="🔥" label="fire" /> : null} {score} pts</div>
             <p><span className="post-date">{dateString}</span></p>
           </div>
         )

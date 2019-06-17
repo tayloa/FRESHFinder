@@ -71,19 +71,19 @@ class InfoContainer extends React.Component {
 
   generateIcon(url) {
     if (url.includes("spotify")) {
-      return (<abbr title="Spotify" key={"spotify"}> <a href={url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
+      return (<abbr title="Spotify Link" key={"spotify"}> <a href={url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
     }
     if (url.includes("apple")) {
-      return (<abbr title="Apple Music" key={"apple"}> <a href={url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
+      return (<abbr title="Apple Music Link" key={"apple"}> <a href={url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
     }
     if (url.includes("bandcamp")) {
-      return (<abbr title="Bandcamp" key={"bandcamp"}> <a href={url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
+      return (<abbr title="Bandcamp Link" key={"bandcamp"}> <a href={url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
     }
     if (url.includes("soundcloud")) {
-      return (<abbr title="Soundcloud" key={"soundcloud"}> <a href={url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
+      return (<abbr title="Soundcloud Link" key={"soundcloud"}> <a href={url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
     }
     if (url.includes("youtube")) {
-      return (<abbr title="YouTube" key={"youtube"}> <a href={url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
+      return (<abbr title="YouTube Link" key={"youtube"}> <a href={url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
     }
     return null;
   }
@@ -126,26 +126,29 @@ class InfoContainer extends React.Component {
       var post = this.state.post;
       var platforms  = this.state.links.map( this.generateIcon );
       if (post.url.includes("apple")) {
-        platforms.push(<abbr title="Apple Music" key={"apple"}><a href={post.url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
+        platforms.push(<abbr title="Apple Music Link" key={"apple"}><a href={post.url}>  <FontAwesomeIcon icon={faApple} /></a></abbr>);
       }
       if (post.url.includes("bandcamp")) {
-        platforms.push(<abbr title="Bandcamp" key={"bandcamp"}><a href={post.url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
+        platforms.push(<abbr title="Bandcamp Link" key={"bandcamp"}><a href={post.url}>  <FontAwesomeIcon icon={faBandcamp} /></a></abbr>);
       }
       if (post.url.includes("soundcloud")) {
-        platforms.push(<abbr title="Soundcloud" key={"soundcloud"}><a href={post.url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
+        platforms.push(<abbr title="Soundcloud Link" key={"soundcloud"}><a href={post.url}>  <FontAwesomeIcon icon={faSoundcloud} /></a></abbr>);
       }
       if (post.url.includes("spotify")) {
-        platforms.push(<abbr title="Spotify" key={"spotify"}><a href={post.url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
+        platforms.push(<abbr title="Spotify Link" key={"spotify"}><a href={post.url}>  <FontAwesomeIcon icon={faSpotify} /></a></abbr>);
       }
       if (post.url.includes("youtube")) {
-        platforms.push(<abbr title="YouTube" key={"youtube"}><a href={post.url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
+        platforms.push(<abbr title="YouTube Link" key={"youtube"}><a href={post.url}>  <FontAwesomeIcon icon={faYoutube} /></a></abbr>);
       }
-      platforms.push(<abbr title="Reddit" key={"reddit"}><a href={"https://www.reddit.com"+ this.state.post.permalink}><FontAwesomeIcon icon={faReddit} /></a></abbr>);
+      platforms.push(<abbr title="Reddit Link" key={"reddit"}><a href={"https://www.reddit.com"+ this.state.post.permalink}><FontAwesomeIcon icon={faReddit} /></a></abbr>);
 
       return (
         <div>
           <span className="close-button" onClick={this.closePost}><FontAwesomeIcon icon={faWindowClose} /></span>
           <div id="info-container">
+            <a href={"https://www.reddit.com"+ this.state.post.permalink}>
+              <abbr title="Reddit Link"><p>{this.state.post.title}</p></abbr>
+            </a>
             <div className="content">
               {
                 this.state.loading ?
@@ -157,7 +160,6 @@ class InfoContainer extends React.Component {
                 <iframe title="embedded" src={this.state.embedded} onLoad={this.hideSpinner} width="100%" height="auto" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
                    <div className="center">Unable to generate preview</div>
               }
-
               <p className="post-platforms">
                 {
                   platforms
@@ -168,16 +170,6 @@ class InfoContainer extends React.Component {
         </div>
       )
     }
-    // <p className="info-text">{title}</p>
-    // <p className="info-text">{post.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-    // <p className="info-text">{post.subreddit}</p>
-    // <p className="info-text">{post.link}</p>
-    // <a href={post.domain} className="info-text">{post.domain}</a>
-    // <a href={"https://www.reddit.com"+post.permalink}><p>{post.title}</p></a>
-    // <span>Release History (Graph Data)</span>
-    // {
-    //   platforms
-    // }
   }
 
 }
