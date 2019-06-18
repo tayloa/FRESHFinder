@@ -21,7 +21,7 @@ class PostContainer extends React.Component {
   }
 
   serverRequest = () => {
-    axios.get(`http://localhost:8080/api/search/${this.state.filters ? this.state.filters.time : ""}`)
+    axios.get(`http://localhost:3000/api/search/${this.state.filters ? this.state.filters.time : ""}`)
       .then(res => {
             var posts = res.data;
             this.setState({ posts });
