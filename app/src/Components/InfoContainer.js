@@ -22,10 +22,13 @@ class InfoContainer extends React.Component {
 
   getLinks(text) {
     var links = text.match(/href="[^"]*"/g);
-    var res = links.map(function(link) {
-      var parsed = link.match(/"(.*?)"/g);
-      return parsed[0];
-    });
+    var res = []
+    if (links) {
+      links.map(function(link) {
+        var parsed = link.match(/"(.*?)"/g);
+        return parsed[0];
+      });
+    }
     return res;
   }
 
@@ -151,7 +154,7 @@ class InfoContainer extends React.Component {
             </a>
             <div className="content">
               {
-                this.state.loading ?
+                (this.state.loading && this.state.embedded )?
                   <ReactLoading className="loading-container" type={"bars"} color={"white"} height={"25%"} width={"25%"} /> :
                       null
               }

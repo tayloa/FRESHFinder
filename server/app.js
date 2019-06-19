@@ -6,9 +6,8 @@ const bodyParser = require('body-parser');
 const errorHandler = require('errorhandler');
 const cors = require('cors');
 const snoowrap = require('snoowrap');
-const port = 3000;
-
 const isProduction = process.env.NODE_ENV === 'production';
+const port = (isProduction ? 3000 : 5000 );
 
 // Configure app
 const app = express();
@@ -56,4 +55,22 @@ app.use((err, req, res) => {
 });
 
 
-const server = app.listen((process.env.port || 3000), () => console.log(`[FRESH]Finder is listening on port ${port}!`));
+const server = app.listen((port), () => console.log(`[FRESH]Finder is listening on port ${port}!`));
+
+// GRACEFUL SHUTDOWN
+process.on('SIGINT', () => {
+  console.info('SIGINT signal received.');
+  console.log('Closing http server.');
+  server.close(() => {
+    console.log('Http server closed.');
+    process.exit(0);
+  });
+});
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  server.close(() => {
+    console.log('Http server closed.');
+    process.exit(0);
+  });
+});
