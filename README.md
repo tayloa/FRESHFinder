@@ -1,2 +1,2 @@
 # FRESHFinder
-Music news powered by Reddit!
+Music drops powered by Reddit!
