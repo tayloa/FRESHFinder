@@ -3,8 +3,8 @@ const router = require('express').Router();
 const snoowrap = require('snoowrap');
 
 var options = {
-  client_id: process.env.client_id,
-	client_secret: process.env.client_secret,
+  clientId: process.env.client_id,
+	clientSecret: process.env.client_secret,
 	username: process.env.username,
 	password: process.env.password,
   userAgent: "FRESHBot"
